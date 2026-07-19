@@ -1,2 +1,2 @@
 # kahanisuno
-kahani suno Zubani Sunpo
+kahani suno Zubani Suno
