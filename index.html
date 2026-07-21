@@ -1,58 +1,78 @@
 <!-- Hidden High-Quality HTML5 Audio Tag -->
 <audio id="audio-element" preload="auto" crossorigin="anonymous"></audio>
 
+<!-- Console/Status helper to see errors directly on screen -->
+<div id="status-display" style="color: #ff5555; font-family: monospace; margin: 10px 0; font-size: 13px;"></div>
+
 <script>
   let isPlaying = false;
   const audioEl = document.getElementById('audio-element');
   const playBtn = document.getElementById('play-btn');
+  const statusDisplay = document.getElementById('status-display');
 
-  // --- ELEVENLABS & ANTARVASNA CONFIGURATION ---
-  const ELEVENLABS_API_KEY = "YOUR_ELEVENLABS_API_KEY"; // Replace with your actual ElevenLabs API key
-  const ELEVENLABS_VOICE_ID = "21m00Tcm4TlvDq8ikWAM"; // Hindi / Multilingual voice ID
+  // --- CONFIGURATION ---
+  const ELEVENLABS_API_KEY = "YOUR_ELEVENLABS_API_KEY"; // Replace with your valid key
+  const ELEVENLABS_VOICE_ID = "21m00Tcm4TlvDq8ikWAM"; // Voice ID (Rachel / Multilingual)
   const ANTARVASNA_URL = "https://antarvasnastory.weebly.com";
 
   // --- WEB AUDIO API HIGH-QUALITY ENGINE ---
   let audioCtx, source, compressor;
 
   function initHighQualityAudio() {
-    if (!audioCtx) {
-      // 1. Create Web Audio Context
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContext();
+    try {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
 
-      // 2. Connect the HTML5 audio element as the source node
-      source = audioCtx.createMediaElementSource(audioEl);
+        // 1. Hook HTML5 audio element to Web Audio API
+        source = audioCtx.createMediaElementSource(audioEl);
 
-      // 3. Add a Dynamics Compressor for balanced loudness & high vocal clarity
-      compressor = audioCtx.createDynamicsCompressor();
-      compressor.threshold.setValueAtTime(-24, audioCtx.currentTime);
-      compressor.knee.setValueAtTime(30, audioCtx.currentTime);
-      compressor.ratio.setValueAtTime(12, audioCtx.currentTime);
-      compressor.attack.setValueAtTime(0.003, audioCtx.currentTime);
-      compressor.release.setValueAtTime(0.25, audioCtx.currentTime);
+        // 2. Dynamics Compressor for vocal clarity
+        compressor = audioCtx.createDynamicsCompressor();
+        compressor.threshold.setValueAtTime(-24, audioCtx.currentTime);
+        compressor.knee.setValueAtTime(30, audioCtx.currentTime);
+        compressor.ratio.setValueAtTime(12, audioCtx.currentTime);
+        compressor.attack.setValueAtTime(0.003, audioCtx.currentTime);
+        compressor.release.setValueAtTime(0.25, audioCtx.currentTime);
 
-      // 4. Chain: Audio Source -> Dynamics Compressor -> System Speakers
-      source.connect(compressor);
-      compressor.connect(audioCtx.destination);
+        // 3. Connect nodes
+        source.connect(compressor);
+        compressor.connect(audioCtx.destination);
+      }
+
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    } catch (e) {
+      console.error("Web Audio Init Error:", e);
+      logError("Audio Engine Notice: Direct playback mode active.");
     }
+  }
 
-    // Resume context if suspended (browser audio safety rule)
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
+  function logError(msg) {
+    if (statusDisplay) statusDisplay.innerText = msg;
   }
 
   // --- PLAYER ACTIONS ---
   function togglePlay() {
-    initHighQualityAudio(); // Initialize HQ engine on user click
+    initHighQualityAudio();
+
+    if (!audioEl.src) {
+      logError("No audio loaded! Click 'Convert Story to Audio' or 'Play Demo' first.");
+      return;
+    }
 
     if (isPlaying) {
       audioEl.pause();
-      playBtn.innerText = '▶';
+      if (playBtn) playBtn.innerText = '▶';
     } else {
       audioEl.play().then(() => {
-        playBtn.innerText = '⏸';
-      }).catch(err => console.error("Playback error:", err));
+        if (playBtn) playBtn.innerText = '⏸';
+        logError(""); // Clear errors on success
+      }).catch(err => {
+        console.error("Playback Error:", err);
+        logError("Playback blocked or failed. Please interact with the page first.");
+      });
     }
     isPlaying = !isPlaying;
   }
@@ -60,39 +80,58 @@
   function loadStory(title, artist, duration, audioUrl) {
     initHighQualityAudio();
 
-    // Set UI metadata
-    document.getElementById('player-title').innerText = title;
-    document.getElementById('player-artist').innerText = artist;
-    document.getElementById('player-duration').innerText = duration;
+    // Set UI metadata if elements exist
+    const titleEl = document.getElementById('player-title');
+    const artistEl = document.getElementById('player-artist');
+    const durationEl = document.getElementById('player-duration');
 
-    // Load and play high-bitrate audio stream
+    if (titleEl) titleEl.innerText = title;
+    if (artistEl) artistEl.innerText = artist;
+    if (durationEl) durationEl.innerText = duration;
+
     if (audioUrl) {
       audioEl.src = audioUrl;
       audioEl.load();
-      audioEl.play();
-      isPlaying = true;
-      playBtn.innerText = '⏸';
+      audioEl.play().then(() => {
+        isPlaying = true;
+        if (playBtn) playBtn.innerText = '⏸';
+        logError("");
+      }).catch(err => {
+        console.error("Error playing audio stream:", err);
+        logError("Error streaming audio. Click play manually.");
+      });
     }
   }
 
   function playDemo() {
-    // Provide your HQ MP3 or AAC file URL here
-    loadStory('Khamosh Raatein', 'Rahul Sharma', '12:45', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    // Working CORS-friendly sample audio
+    loadStory(
+      'Khamosh Raatein',
+      'Rahul Sharma',
+      'Demo',
+      'https://actions.google.com/sounds/v1/ambiences/rain_heavy.ogg'
+    );
   }
 
-  // --- EXTRA ACTIVITIES & ELEVENLABS TTS ---
+  // --- ANTARVASNA & ELEVENLABS ACTIONS ---
 
-  // 1. Direct Website Redirect
   function openAntarvasnaSite() {
     window.open(ANTARVASNA_URL, '_blank');
   }
 
-  // 2. Convert Story Text to Speech using ElevenLabs API
   async function convertTextWithElevenLabs(text, title = "Antarvasna Audio") {
-    if (ELEVENLABS_API_KEY === "YOUR_ELEVENLABS_API_KEY") {
-      alert("Please configure your ElevenLabs API key in the script.");
+    if (!text || text.trim() === "") {
+      logError("No text entered to convert.");
       return;
     }
+
+    if (ELEVENLABS_API_KEY === "YOUR_ELEVENLABS_API_KEY" || !ELEVENLABS_API_KEY) {
+      alert("Please open the script file and replace 'YOUR_ELEVENLABS_API_KEY' with your real API key.");
+      logError("Missing ElevenLabs API Key.");
+      return;
+    }
+
+    logError("Generating speech with ElevenLabs...");
 
     try {
       const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${ELEVENLABS_VOICE_ID}`, {
@@ -109,21 +148,23 @@
         })
       });
 
-      if (!response.ok) throw new Error("ElevenLabs audio generation failed.");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail?.message || "API request failed with status " + response.status);
+      }
 
+      // Convert response stream to a browser Blob URL (Bypasses CORS restriction!)
       const audioBlob = await response.blob();
       const audioUrl = URL.createObjectURL(audioBlob);
 
-      // Pass generated stream into your standard player function
-      loadStory(title, 'ElevenLabs Voice', 'Auto', audioUrl);
+      loadStory(title, 'ElevenLabs AI Voice', 'Auto', audioUrl);
 
     } catch (error) {
-      console.error(error);
-      alert("Error generating speech with ElevenLabs.");
+      console.error("ElevenLabs Error:", error);
+      logError("ElevenLabs Error: " + error.message);
     }
   }
 
-  // 3. Trigger ElevenLabs audio by prompting for text input
   function generateStoryAudio() {
     const storyText = prompt("Paste the story text from Antarvasna to generate audio:");
     if (storyText) {
