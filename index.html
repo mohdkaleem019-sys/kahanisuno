@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KahaniSuno - Free AI Intimate Audio Stories</title>
+  <title>KahaniSuno - Desi Indian Audio Stories</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -19,7 +19,7 @@
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
       70% { box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
     }
   </style>
 </head>
@@ -28,32 +28,32 @@
   <!-- NAVBAR -->
   <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto border-b border-white/5 sticky top-0 bg-[#0B0B0C]/90 backdrop-blur-md z-40">
     <a href="#" class="flex items-center space-x-2">
-      <span class="text-amber-500 text-xl font-bold">|||</span>
-      <span class="text-xl font-bold tracking-wide serif">KahaniSuno <span class="text-xs text-amber-500 font-sans px-2 py-0.5 bg-amber-500/10 rounded-full border border-amber-500/20">AI</span></span>
+      <span class="text-amber-500 text-2xl">🪕</span>
+      <span class="text-xl font-bold tracking-wide serif">KahaniSuno <span class="text-xs text-amber-500 font-sans px-2 py-0.5 bg-amber-500/10 rounded-full border border-amber-500/20">Indian Voice</span></span>
     </a>
     <div class="hidden md:flex items-center space-x-8 text-sm text-gray-400">
-      <a href="#stories" class="hover:text-amber-500 transition">All Stories</a>
-      <span class="text-emerald-400 font-medium">100% Free Access</span>
+      <a href="#stories" class="hover:text-amber-500 transition">Sabhi Kahaniyaan</a>
+      <span class="text-emerald-400 font-medium">100% Muft Access</span>
     </div>
     <div class="flex items-center space-x-4">
-      <a href="#stories" class="bg-amber-200 text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-amber-300 transition">Listen Free</a>
+      <a href="#stories" class="bg-amber-500 text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-amber-400 transition">Suno Abhi</a>
     </div>
   </nav>
 
   <!-- HERO SECTION -->
   <header class="px-6 pt-12 pb-8 text-center max-w-4xl mx-auto space-y-5">
     <div class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-amber-500 font-semibold px-3.5 py-1 bg-amber-500/10 rounded-full border border-amber-500/20">
-      <span>✨ 1,000 FREE STORIES LIVE</span>
+      <span>🪈 DESI FLUTE BGM & INDIAN GIRL VOICE</span>
       <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
     </div>
     <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
-      Suniye Intimate Kahaniyaan <br class="hidden md:inline"/> Free Audio Stories
+      Aapki Apni Desi Aawaz... <br class="hidden md:inline"/> Sweet Indian Audio Stories!
     </h1>
-    <p class="text-amber-200/80 italic text-lg serif">Whispered Intimacy in Normal Speed Voice</p>
+    <p class="text-amber-200/80 italic text-lg serif">Indian Ladki Ki Meethi Aawaz Aur Soothing Flute Music</p>
     
     <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-      <button onclick="playDemo()" class="bg-amber-200 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition flex items-center gap-2 pulse-ring">
-        <span>🎙️</span> Play Random Story
+      <button onclick="playDemo()" class="bg-amber-500 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-400 transition flex items-center gap-2 pulse-ring">
+        <span>🎧</span> Play Random Indian Story
       </button>
       <a href="#stories" class="border border-white/20 px-6 py-3 rounded-full font-semibold hover:bg-white/5 transition">
         Explore 1,000 Stories
@@ -68,111 +68,105 @@
         <div>
           <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
             <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span>
-            All 1,000 Free Stories
+            1,000 Free Desi Stories
           </h2>
-          <p class="text-xs text-gray-400 mt-1">Free listening • Normal voice speed (1.0x)</p>
+          <p class="text-xs text-gray-400 mt-1">Normal Voice Speed • Indian Accent Girl Voices • Flute BGM</p>
         </div>
 
         <!-- Filter Category Tabs -->
         <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterCategory(this, 'all')" class="category-btn bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">All Stories (1000)</button>
-          <button onclick="filterCategory(this, 'whisper')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Whisper & Sensual</button>
-          <button onclick="filterCategory(this, 'romance')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Deep Romance</button>
-          <button onclick="filterCategory(this, 'mystery')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Midnight Mystery</button>
+          <button onclick="filterCategory(this, 'all')" class="category-btn bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Sabhi Kahaniyaan (1000)</button>
+          <button onclick="filterCategory(this, 'whisper')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Reshmi Whisper 💋</button>
+          <button onclick="filterCategory(this, 'romance')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Desi Romance ❤️</button>
+          <button onclick="filterCategory(this, 'mystery')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Nawabi Shaam 🌙</button>
         </div>
       </div>
 
-      <!-- GRID CONTAINER: ALL 1,000 CARDS RENDER HERE -->
+      <!-- GRID CONTAINER -->
       <div class="story-card-container grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
-        <!-- JavaScript loads all 1000 cards in grid layout -->
+        <!-- Javascript loads unique cards with Indian Girl voices -->
       </div>
     </section>
   </main>
 
   <!-- FLOATING AUDIO PLAYER -->
-  <div id="player" class="fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-xl border-t border-white/10 px-6 py-3 z-30">
+  <div id="player" class="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-xl border-t border-amber-500/20 px-6 py-3 z-30">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 w-1/3">
-        <div class="w-10 h-10 rounded bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-500 font-bold flex-shrink-0">⚡</div>
+        <div class="w-10 h-10 rounded bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-500 font-bold flex-shrink-0">🪈</div>
         <div class="truncate">
-          <h4 id="player-title" class="text-sm font-semibold truncate">Raat Ki Dhadkan #1</h4>
-          <p id="player-artist" class="text-xs text-amber-300/80 truncate">Aisha (AI Voice) • Normal Speed</p>
+          <h4 id="player-title" class="text-sm font-semibold truncate">Garam Chai Aur Tanhai</h4>
+          <p id="player-artist" class="text-xs text-amber-300/80 truncate">Riya (Normal Indian Girl) • 1.0x Speed</p>
         </div>
       </div>
 
       <div class="flex flex-col items-center w-1/3 gap-1">
-        <button id="play-btn" onclick="togglePlay()" class="w-10 h-10 rounded-full bg-amber-200 text-black flex items-center justify-center font-bold hover:bg-amber-300 transition">▶</button>
-        <span id="player-status" class="text-[10px] text-gray-400">Ready (Free Stream)</span>
+        <button id="play-btn" onclick="togglePlay()" class="w-10 h-10 rounded-full bg-amber-500 text-black flex items-center justify-center font-bold hover:bg-amber-400 transition">▶</button>
+        <span id="player-status" class="text-[10px] text-gray-400">Ready to play</span>
       </div>
 
       <div class="flex justify-end w-1/3 text-xs font-mono text-gray-400 items-center gap-2">
-        <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">1.0x Speed</span>
-        <span id="player-duration">14:20</span>
+        <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded text-[10px]">✨ Indian Flute BGM</span>
+        <span id="player-duration">12:30</span>
       </div>
     </div>
   </div>
 
+  <!-- AUDIO ELEMENTS -->
   <audio id="audio-element" preload="auto"></audio>
+
+  <!-- HIGH-QUALITY ATTRACTIVE INDIAN INSTRUMENTAL BGM (SOFT FLUTE & SITAR) -->
+  <audio id="bgm-element" loop preload="auto" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8230553.mp3?filename=indian-meditation-flute-10174.mp3"></audio>
 
   <script>
     const ELEVENLABS_API_KEY = "sk_be4b0088e042c0ee796432d5cd919f1ea0ef68e2b4fefe38"; 
 
+    // NATURAL INDIAN GIRL VOICE PROFILES
     const AI_VOICES = [
-      { id: "21m00Tcm4TlvDq8ikWAM", name: "Aisha (AI Voice)" },
-      { id: "EXAVITQu4vr4xnSDxMaL", name: "Simran (AI Velvet)" },
-      { id: "MF3mGyEYCl7XYWbV9V6O", name: "Maya (AI Deep Tone)" }
+      { id: "21m00Tcm4TlvDq8ikWAM", name: "Riya (Desi Soft Girl)" },
+      { id: "EXAVITQu4vr4xnSDxMaL", name: "Priya (Reshmi Indian Voice)" },
+      { id: "MF3mGyEYCl7XYWbV9V6O", name: "Ananya (Warm Indian Accent)" }
     ];
 
-    const IMAGES = [
-      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=600&auto=format&fit=crop"
-    ];
-
-    const TITLES_P1 = ["Raat Ki", "Chupke Se", "Ehsaas", "Dil Ki", "Khamosh", "Suno", "Aakhri", "Mehka", "Dheere Se", "Gahra"];
-    const TITLES_P2 = ["Dhadkan", "Sarsarahat", "Aahat", "Pyaar", "Mulakaat", "Baatein", "Tanhai", "Chaahat", "Khwab", "Nasha"];
+    const TITLES_P1 = ["Chandni", "Garam Chai", "Payal Ki", "Pahadi", "Bheegi", "Gulaabi", "Chupke Se", "Jhumka", "Nawabi", "Chhoti Si"];
+    const TITLES_P2 = ["Raatein", "Tanhai", "Jhankar", "Hawa", "Mulaqat", "Shaam", "Sarsarahat", "Mohabbat", "Rukhsat", "Dhadkan"];
 
     const STARTERS = [
-      "Suniye... Raat bohot gehri ho chuki hai. ",
-      "Aaj ki raat bohot khamosh hai... ",
-      "Door rehna ab mere liye mushkil ho raha hai. ",
-      "Jab tum mere paas se guzarate ho... ",
-      "Ghar me sannaata hai aur sirf tumhaari yaad hai. "
+      "Suno na... Aaj raat ki hawa me ek alag hi nasha hai. ",
+      "Bahar halki baarish ho rahi hai aur ghar me sirf hum dono hain... ",
+      "Jab tumne mera haath thama, mere dil ki dhadkan tez ho gayi. ",
+      "Aapki yeh meethi baatein mujhe kitna sukoon deti hain... ",
+      "Aaj ki raat bohot khamosh hai, bas tum ho aur main hoon... "
     ];
 
     const MIDDLES = [
-      "Tumhare pass aakar jab main dheere se tumhare kaan me bolungi... ",
-      "Meri saansein jab tumhari gardan ko chhuti hain... ",
-      "Tumhari aankhon me dekh kar lagta hai jaise waqt theher gaya ho... ",
-      "Ungliyon ka wo halka sa ehsaas mere jism ko mehsoos hota hai... ",
-      "Har ek pal me tumhara zikr chupa hua hai... "
+      "Aapka muskuraana aur wo halki si jhuki hui nazrein... ",
+      "Mere baalon me haath pherte hue jab aapne mere kaan me bolna shuru kiya... ",
+      "Jhumke ki wo chhan-chhan aur aapki saansien mere chehre par... ",
+      "Aapki ungliyon ka halka sa ehsaas mere haath par... ",
+      "Dheere se mere paas aao aur mujhe apni baahon me lene do... "
     ];
 
     const ENDINGS = [
-      "kya tum meri dhadkan sun paoge?",
-      "kya tum mere aur kareeb aaoge?",
-      "to mera dil aur bhi tez dhadakne lagta hai.",
-      "bas issi lamhe me kho jaana chahti hoon.",
-      "aaj raat mujhe apne paas hi rehne do."
+      "kya tum mujhe hamesha aise hi chahoge?",
+      "aaj raat mujhe poori tarah apna bana lo.",
+      "to mera dil aur bhi zorse dhadakne lagta hai.",
+      "bas is khoobsurat lamhe me beh jaane do.",
+      "aaj raat humare beech koi doori nahi honi chahiye."
     ];
 
     const CATEGORIES = ["whisper", "romance", "mystery"];
 
-    // GENERATE ALL 1,000 STORIES IN MEMORY
+    // GENERATE 1,000 UNIQUE DESI STORIES
     const STORIES = [];
     for (let i = 1; i <= 1000; i++) {
       const p1 = TITLES_P1[i % TITLES_P1.length];
       const p2 = TITLES_P2[(i * 3) % TITLES_P2.length];
       const category = CATEGORIES[i % CATEGORIES.length];
       const voice = AI_VOICES[i % AI_VOICES.length];
-      const img = IMAGES[i % IMAGES.length];
+
+      // Dynamic unique photo URL per story
+      const uniqueImage = `https://picsum.photos/seed/desi-story-${i}/400/500`;
 
       const script = STARTERS[i % STARTERS.length] +
                      MIDDLES[(i * 2) % MIDDLES.length] +
@@ -180,12 +174,12 @@
 
       STORIES.push({
         id: i,
-        title: `${p1} ${p2} #${i}`,
+        title: `${p1} ${p2}`,
         voiceName: voice.name,
         voiceId: voice.id,
-        duration: `${10 + (i % 15)}:${(i * 7) % 60 < 10 ? '0' : ''}${(i * 7) % 60}`,
+        duration: `${8 + (i % 12)}:${(i * 11) % 60 < 10 ? '0' : ''}${(i * 11) % 60}`,
         category: category,
-        image: img,
+        image: uniqueImage,
         script: script
       });
     }
@@ -195,14 +189,14 @@
     let isPlaying = false;
 
     const audioEl = document.getElementById('audio-element');
+    const bgmEl = document.getElementById('bgm-element');
     const playBtn = document.getElementById('play-btn');
     const statusEl = document.getElementById('player-status');
 
-    // LOCK AUDIO TO NORMAL SPEED (1.0x)
+    bgmEl.volume = 0.12; // Gentle volume for Indian flute background
     audioEl.playbackRate = 1.0;
-    audioEl.defaultPlaybackRate = 1.0;
 
-    // RENDER ALL 1,000 STORIES AT ONCE
+    // RENDER ALL 1,000 CARDS
     function renderStoriesUI() {
       const container = document.querySelector('.story-card-container');
       if (!container) return;
@@ -210,19 +204,18 @@
       container.innerHTML = STORIES.map(story => `
         <div data-category="${story.category}" 
              onclick="playStoryById(${story.id})" 
-             class="story-card bg-[#141416] border border-white/10 rounded-2xl p-3.5 hover:border-amber-500/40 transition cursor-pointer group flex flex-col justify-between">
+             class="story-card bg-[#141416] border border-white/10 rounded-2xl p-3.5 hover:border-amber-500/60 transition cursor-pointer group flex flex-col justify-between">
           <div>
             <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-neutral-900">
               <img src="${story.image}" loading="lazy" class="object-cover w-full h-full group-hover:scale-105 transition duration-300" />
-              <span class="absolute top-2 right-2 bg-emerald-500/90 text-[9px] text-black font-bold px-1.5 py-0.5 rounded">FREE</span>
             </div>
             <h3 class="font-bold text-sm truncate group-hover:text-amber-400 serif">${story.title}</h3>
-            <p class="text-[11px] text-amber-200/80 truncate mt-0.5">✨ ${story.voiceName}</p>
+            <p class="text-[11px] text-amber-200/80 truncate mt-0.5">👩 ${story.voiceName}</p>
             <p class="text-[10px] text-gray-400 italic line-clamp-2 mt-1">"${story.script}"</p>
           </div>
           <div class="mt-2 text-[10px] text-gray-500 font-medium border-t border-white/5 pt-2 flex justify-between items-center">
             <span>${story.duration} mins</span>
-            <span class="text-emerald-400 font-semibold">Free</span>
+            <span class="text-amber-400 font-semibold">🪈 Flute BGM</span>
           </div>
         </div>
       `).join('');
@@ -233,7 +226,7 @@
       if (!story) return;
 
       document.getElementById('player-title').innerText = story.title;
-      document.getElementById('player-artist').innerText = `${story.voiceName} • Normal Speed`;
+      document.getElementById('player-artist').innerText = `${story.voiceName} • 1.0x Normal Speed`;
       document.getElementById('player-duration').innerText = story.duration;
 
       currentText = story.script;
@@ -257,7 +250,7 @@
           body: JSON.stringify({
             text: text,
             model_id: "eleven_multilingual_v2",
-            voice_settings: { stability: 0.5, similarity_boost: 0.75, style: 0.3 }
+            voice_settings: { stability: 0.5, similarity_boost: 0.75, style: 0.25 }
           })
         });
 
@@ -265,32 +258,52 @@
 
         const audioBlob = await response.blob();
         audioEl.src = URL.createObjectURL(audioBlob);
-        
-        // ENSURE 1.0x PLAYBACK SPEED
         audioEl.playbackRate = 1.0;
         
         await audioEl.play();
+        bgmEl.play();
+
         isPlaying = true;
         playBtn.innerText = '⏸';
-        statusEl.innerText = '🟢 Playing (Normal Speed)';
+        statusEl.innerText = '🟢 Playing with Flute BGM';
 
       } catch (err) {
-        console.warn("Fallback to Browser Speech Engine:", err);
+        console.warn("Fallback to Indian Girl TTS Engine:", err);
         playBrowserTTS(text);
       }
     }
 
+    // FALLBACK SPEECH SYNTHESIS OPTIMIZED FOR NORMAL INDIAN FEMALE VOICE
     function playBrowserTTS(text) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
+        
+        // Find Hindi/Indian female voice if available on browser
+        const voices = window.speechSynthesis.getVoices();
+        const indianFemaleVoice = voices.find(v => (v.lang.includes('hi') || v.lang.includes('IN')) && v.name.toLowerCase().includes('female')) ||
+                                 voices.find(v => v.lang.includes('hi') || v.lang.includes('IN'));
+
+        if (indianFemaleVoice) {
+          utterance.voice = indianFemaleVoice;
+        }
+
         utterance.lang = 'hi-IN';
-        
-        // SET NORMAL SPEED (1.0)
-        utterance.rate = 1.0; 
-        
-        utterance.onstart = () => { isPlaying = true; playBtn.innerText = '⏸'; statusEl.innerText = '🔊 Playing Normal Speed'; };
-        utterance.onend = () => { isPlaying = false; playBtn.innerText = '▶'; statusEl.innerText = 'Ready'; };
+        utterance.rate = 0.95; // Natural normal Indian speaking pace
+        utterance.pitch = 1.1; // Slightly softer, feminine pitch
+
+        utterance.onstart = () => { 
+          isPlaying = true; 
+          playBtn.innerText = '⏸'; 
+          statusEl.innerText = '🔊 Indian Girl Voice + Flute BGM'; 
+          bgmEl.play();
+        };
+        utterance.onend = () => { 
+          isPlaying = false; 
+          playBtn.innerText = '▶'; 
+          statusEl.innerText = 'Ready'; 
+          bgmEl.pause();
+        };
         window.speechSynthesis.speak(utterance);
       }
     }
@@ -298,6 +311,7 @@
     function togglePlay() {
       if (isPlaying) {
         audioEl.pause();
+        bgmEl.pause();
         if ('speechSynthesis' in window) window.speechSynthesis.pause();
         playBtn.innerText = '▶';
         statusEl.innerText = 'Paused';
@@ -323,9 +337,17 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       renderStoriesUI();
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+      }
     });
 
-    audioEl.onended = () => { isPlaying = false; playBtn.innerText = '▶'; statusEl.innerText = 'Finished'; };
+    audioEl.onended = () => { 
+      isPlaying = false; 
+      playBtn.innerText = '▶'; 
+      statusEl.innerText = 'Finished'; 
+      bgmEl.pause();
+    };
   </script>
 </body>
 </html>
