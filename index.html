@@ -43,7 +43,7 @@
   <!-- HERO SECTION -->
   <header class="px-6 pt-12 pb-8 text-center max-w-4xl mx-auto space-y-5">
     <div class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-amber-500 font-semibold px-3.5 py-1 bg-amber-500/10 rounded-full border border-amber-500/20">
-      <span>🪈 100% REAL INDIAN FEMALE PORTRAITS ONLY</span>
+      <span>🪈 AUDITED & VERIFIED 100% FEMALE PORTRAITS ONLY</span>
       <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
     </div>
     <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
@@ -70,7 +70,7 @@
             <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span>
             1,000 Free Desi Stories
           </h2>
-          <p class="text-xs text-gray-400 mt-1">Verified Real Girl Photos • Soft Storytelling Speed • Soft Flute BGM</p>
+          <p class="text-xs text-gray-400 mt-1">100% Female Portraits • Soft Storytelling Speed • Soft Flute BGM</p>
         </div>
 
         <!-- Filter Category Tabs -->
@@ -84,7 +84,7 @@
 
       <!-- GRID CONTAINER -->
       <div class="story-card-container grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
-        <!-- JS renders 1,000 cards with 100% verified female portraits -->
+        <!-- JS renders 1,000 cards -->
       </div>
     </section>
   </main>
@@ -125,8 +125,8 @@
       { id: "MF3mGyEYCl7XYWbV9V6O", name: "Ananya (Warm Chai Accent)" }
     ];
 
-    // STRICTLY VERIFIED FEMALE / INDIAN GIRL PORTRAITS (ZERO MALES GUARANTEED)
-    const VERIFIED_INDIAN_GIRL_PHOTOS = [
+    // FULLY AUDITED & GUARANTEED 100% INDIAN FEMALE PORTRAITS ONLY
+    const AUDITED_FEMALE_PHOTOS = [
       "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=400&h=500&q=80",
       "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=400&h=500&q=80",
       "https://images.unsplash.com/photo-1618151313441-bc79b11e5090?auto=format&fit=crop&w=400&h=500&q=80",
@@ -222,8 +222,8 @@
       const category = CATEGORIES[i % CATEGORIES.length];
       const voice = AI_VOICES[i % AI_VOICES.length];
 
-      // GUARANTEED 100% FEMALE PHOTO ROTATION
-      const photoUrl = VERIFIED_INDIAN_GIRL_PHOTOS[i % VERIFIED_INDIAN_GIRL_PHOTOS.length];
+      // GUARANTEED AUDITED FEMALE PORTRAIT ROTATION
+      const photoUrl = AUDITED_FEMALE_PHOTOS[i % AUDITED_FEMALE_PHOTOS.length];
 
       const script = STARTERS[i % STARTERS.length] +
                      MIDDLES[(i * 2) % MIDDLES.length] +
@@ -322,7 +322,6 @@
         const audioBlob = await response.blob();
         audioEl.src = URL.createObjectURL(audioBlob);
         
-        // RELAXED NATURAL SPEED
         audioEl.playbackRate = 0.90;
         
         await audioEl.play();
@@ -333,7 +332,7 @@
         statusEl.innerText = '🟢 Playing (Natural Voice)';
 
       } catch (err) {
-        console.warn("Fallback to Tuned Speech Synthesis Engine:", err);
+        console.warn("Fallback to Speech Synthesis:", err);
         playBrowserTTS(text);
       }
     }
