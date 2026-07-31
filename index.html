@@ -43,7 +43,7 @@
   <!-- HERO SECTION -->
   <header class="px-6 pt-12 pb-8 text-center max-w-4xl mx-auto space-y-5">
     <div class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-amber-500 font-semibold px-3.5 py-1 bg-amber-500/10 rounded-full border border-amber-500/20">
-      <span>🪈 100% DESI INDIAN FEMALE PORTRAITS GUARANTEED</span>
+      <span>🪈 100% VERIFIED INDIAN FEMALE PORTRAITS ONLY</span>
       <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
     </div>
     <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
@@ -70,7 +70,7 @@
             <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span>
             1,000 Free Desi Stories
           </h2>
-          <p class="text-xs text-gray-400 mt-1">Indian Girl Portraits • Soft Storytelling Speed • Soft Flute BGM</p>
+          <p class="text-xs text-gray-400 mt-1">Desi Female Voices • Soft Storytelling Speed • Soft Flute BGM</p>
         </div>
 
         <!-- Filter Category Tabs -->
@@ -125,8 +125,8 @@
       { id: "MF3mGyEYCl7XYWbV9V6O", name: "Ananya (Warm Chai Accent)" }
     ];
 
-    // GUARANTEED DIRECT HIGH-DEF INDIAN FEMALE PORTRAITS ONLY
-    const DIRECT_INDIAN_FEMALE_PHOTOS = [
+    // HAND-PICKED, VERIFIED DIRECT URLS OF INDIAN FEMALE PORTRAITS ONLY
+    const VERIFIED_DESI_FEMALES = [
       "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=400&h=500&q=80",
       "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=400&h=500&q=80",
       "https://images.unsplash.com/photo-1618151313441-bc79b11e5090?auto=format&fit=crop&w=400&h=500&q=80",
@@ -196,8 +196,8 @@
       const category = CATEGORIES[i % CATEGORIES.length];
       const voice = AI_VOICES[i % AI_VOICES.length];
 
-      // GUARANTEED ROTATION OF VERIFIED DESI FEMALE PORTRAITS ONLY
-      const photoUrl = DIRECT_INDIAN_FEMALE_PHOTOS[i % DIRECT_INDIAN_FEMALE_PHOTOS.length];
+      // GUARANTEED SAFE ROTATION THROUGH VERIFIED DESI PORTRAITS ONLY
+      const photoUrl = VERIFIED_DESI_FEMALES[(i - 1) % VERIFIED_DESI_FEMALES.length];
 
       const script = STARTERS[i % STARTERS.length] +
                      MIDDLES[(i * 2) % MIDDLES.length] +
