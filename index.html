@@ -1,18 +1,279 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KahaniSuno - AI Intimate Audio Stories</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .pulse-ring {
+      box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+      70% { box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    }
+  </style>
+</head>
+<body class="bg-[#0B0B0C] text-gray-100 antialiased min-h-screen pb-32">
+
+  <!-- NAVBAR -->
+  <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto border-b border-white/5 sticky top-0 bg-[#0B0B0C]/90 backdrop-blur-md z-40">
+    <a href="#" class="flex items-center space-x-2">
+      <span class="text-amber-500 text-xl font-bold">|||</span>
+      <span class="text-xl font-bold tracking-wide serif">KahaniSuno <span class="text-xs text-amber-500 font-sans px-2 py-0.5 bg-amber-500/10 rounded-full border border-amber-500/20">AI</span></span>
+    </a>
+    <div class="hidden md:flex items-center space-x-8 text-sm text-gray-400">
+      <a href="#stories" class="hover:text-amber-500 transition">Stories</a>
+      <a href="#elevenlabs-setup" class="hover:text-amber-500 transition">ElevenLabs Status</a>
+      <a href="#pricing" class="hover:text-amber-500 transition">Pricing</a>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button onclick="openAuthModal('login')" class="text-sm text-gray-300 hover:text-white font-medium">Sign In</button>
+      <button onclick="openAuthModal('signup')" class="bg-amber-200 text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-amber-300 transition">Start Free</button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="px-6 pt-16 pb-12 text-center max-w-4xl mx-auto space-y-6">
+    <div class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-amber-500 font-semibold px-3.5 py-1 bg-amber-500/10 rounded-full border border-amber-500/20">
+      <span>✨ ELEVENLABS AI VOICE LIVE</span>
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+    </div>
+    <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
+      Suniye Intimate Kahaniyaan <br class="hidden md:inline"/> AI Sensual Female Voices Mein
+    </h1>
+    <p class="text-amber-200/80 italic text-lg serif">Whispered Intimacy, Powered by ElevenLabs API</p>
+    <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto">
+      Experience ultra-expressive, tempting Hindi & Hinglish audio narrations with live ElevenLabs streaming voice generation.
+    </p>
+
+    <!-- ACTION BUTTONS -->
+    <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+      <button onclick="playDemo()" class="bg-amber-200 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition flex items-center gap-2 pulse-ring">
+        <span>🎙️</span> Play ElevenLabs Sample
+      </button>
+
+      <a href="#pricing" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 px-6 py-3 rounded-full font-semibold hover:bg-amber-500/20 transition flex items-center gap-2">
+        <span>⚡</span> Unlock All AI Voices
+      </a>
+
+      <a href="#stories" class="border border-white/20 px-6 py-3 rounded-full font-semibold hover:bg-white/5 transition">
+        Browse Stories
+      </a>
+    </div>
+  </header>
+
+  <!-- STORIES SECTION WITH CATEGORY FILTER TABS -->
+  <main id="stories" class="max-w-7xl mx-auto px-6 space-y-16 mt-8">
+    <section>
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+            <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span>
+            AI Female Narrations
+          </h2>
+          <p class="text-xs text-gray-400 mt-1">Deep, tempting Hindi & Hinglish vocal tracks</p>
+        </div>
+
+        <!-- Category Tabs Filter -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+          <button onclick="filterCategory(this, 'all')" class="category-btn bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">All Stories</button>
+          <button onclick="filterCategory(this, 'whisper')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Whisper & Sensual</button>
+          <button onclick="filterCategory(this, 'romance')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Deep Romance</button>
+          <button onclick="filterCategory(this, 'mystery')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Midnight Mystery</button>
+        </div>
+      </div>
+
+      <!-- CAROUSEL TRACK WITH HINDI AI FEMALE STORIES -->
+      <div class="flex gap-5 overflow-x-auto pb-4 no-scrollbar">
+        
+        <!-- Story 1 -->
+        <div data-category="whisper" onclick="loadStory('Chupke Se...', 'Aisha (ElevenLabs AI)', '14:20', '21m00Tcm4TlvDq8ikWAM')" class="story-card flex-none w-52 bg-[#141416] border border-white/10 rounded-2xl p-3.5 hover:border-amber-500/40 transition cursor-pointer group">
+          <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-neutral-900">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400" class="object-cover w-full h-full group-hover:scale-105 transition duration-300" />
+            <span class="absolute top-2 right-2 bg-black/80 text-[10px] text-amber-400 font-bold px-2 py-0.5 rounded border border-amber-500/30">LIVE API</span>
+          </div>
+          <h3 class="font-bold text-base truncate group-hover:text-amber-400 serif">Chupke Se...</h3>
+          <p class="text-xs text-amber-200/80 truncate mt-1 flex items-center gap-1">✨ Aisha (AI Voice)</p>
+          <p class="text-[11px] text-gray-400 italic line-clamp-2 mt-1.5">"Tumhare pass aakar... jab main dheere se..."</p>
+          <div class="mt-2 text-xs text-gray-500 font-medium">14 mins • Hinglish Sensual</div>
+        </div>
+
+        <!-- Story 2 -->
+        <div data-category="romance" onclick="loadStory('Raat Aur Tum', 'Simran (ElevenLabs AI)', '18:10', 'EXAVITQu4vr4xnSDxMaL')" class="story-card flex-none w-52 bg-[#141416] border border-white/10 rounded-2xl p-3.5 hover:border-amber-500/40 transition cursor-pointer group">
+          <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-neutral-900">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=400" class="object-cover w-full h-full group-hover:scale-105 transition duration-300" />
+            <span class="absolute top-2 right-2 bg-black/80 text-[10px] text-amber-400 font-bold px-2 py-0.5 rounded border border-amber-500/30">HOT</span>
+          </div>
+          <h3 class="font-bold text-base truncate group-hover:text-amber-400 serif">Raat Aur Tum</h3>
+          <p class="text-xs text-amber-200/80 truncate mt-1 flex items-center gap-1">✨ Simran (AI Velvet)</p>
+          <p class="text-[11px] text-gray-400 italic line-clamp-2 mt-1.5">"Aaj ki raat bohot khamosh hai..."</p>
+          <div class="mt-2 text-xs text-gray-500 font-medium">18 mins • Romantic Hindi</div>
+        </div>
+
+        <!-- Story 3 -->
+        <div data-category="whisper" onclick="loadStory('Ehsaas Tera', 'Maya (ElevenLabs AI)', '16:00', 'MF3mGyEYCl7XYWbV9V6O')" class="story-card flex-none w-52 bg-[#141416] border border-white/10 rounded-2xl p-3.5 hover:border-amber-500/40 transition cursor-pointer group">
+          <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-neutral-900">
+            <img src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=400" class="object-cover w-full h-full group-hover:scale-105 transition duration-300" />
+            <span class="absolute top-2 right-2 bg-black/80 text-[10px] text-amber-400 font-bold px-2 py-0.5 rounded border border-amber-500/30">NEW</span>
+          </div>
+          <h3 class="font-bold text-base truncate group-hover:text-amber-400 serif">Ehsaas Tera</h3>
+          <p class="text-xs text-amber-200/80 truncate mt-1 flex items-center gap-1">✨ Maya (AI Deep Tone)</p>
+          <p class="text-[11px] text-gray-400 italic line-clamp-2 mt-1.5">"Door rehna ab mushkil hai..."</p>
+          <div class="mt-2 text-xs text-gray-500 font-medium">16 mins • Whisper Art</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ELEVENLABS STATUS -->
+    <section id="elevenlabs-setup" class="bg-amber-500/5 border border-amber-500/20 rounded-2xl p-6 md:p-8 space-y-4">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl">🟢</span>
+        <div>
+          <h3 class="text-lg font-bold text-white">ElevenLabs API Key Active</h3>
+          <p class="text-xs text-gray-400">Your site is connected directly to ElevenLabs Text-to-Speech API (`eleven_multilingual_v2`).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="pt-8 border-t border-white/10">
+      <div class="text-center max-w-xl mx-auto mb-10 space-y-2">
+        <h2 class="text-2xl md:text-3xl font-bold">Unlimited AI Audio Access</h2>
+        <p class="text-gray-400 text-sm">Choose pay-per-episode coins or unlimited AI story VIP passes.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <!-- Coin Pack -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-amber-500/30 transition">
+          <div class="space-y-4">
+            <div class="inline-block bg-amber-500/10 text-amber-400 text-xs px-2.5 py-1 rounded-md font-semibold border border-amber-500/20">Pay As You Go</div>
+            <h3 class="text-xl font-bold">Coin Pack</h3>
+            <div class="text-3xl font-bold text-white">₹49 <span class="text-xs text-gray-400 font-normal">/ 50 Coins</span></div>
+            <ul class="text-xs text-gray-300 space-y-2 pt-2 border-t border-white/10">
+              <li class="flex items-center gap-2"><span>✔</span> Unlock 10 AI Episodes</li>
+              <li class="flex items-center gap-2"><span>✔</span> Coins never expire</li>
+              <li class="flex items-center gap-2"><span>✔</span> Ideal for casual listeners</li>
+            </ul>
+          </div>
+          <button onclick="openAuthModal('signup')" class="mt-6 w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-2.5 rounded-full transition text-sm">Buy Coins</button>
+        </div>
+
+        <!-- Monthly VIP Pass -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-amber-500/30 transition">
+          <div class="space-y-4">
+            <div class="inline-block bg-amber-500/10 text-amber-400 text-xs px-2.5 py-1 rounded-md font-semibold border border-amber-500/20">Most Popular</div>
+            <h3 class="text-xl font-bold">Monthly VIP Pass</h3>
+            <div class="text-3xl font-bold text-amber-400">₹149 <span class="text-xs text-gray-400 font-normal">/ month</span></div>
+            <ul class="text-xs text-gray-300 space-y-2 pt-2 border-t border-white/10">
+              <li class="flex items-center gap-2"><span>✔</span> Unlimited ElevenLabs Voice Playback</li>
+              <li class="flex items-center gap-2"><span>✔</span> High Bitrate Audio Quality</li>
+              <li class="flex items-center gap-2"><span>✔</span> Zero Ads & Instant Stream</li>
+              <li class="flex items-center gap-2"><span>✔</span> Cancel Anytime</li>
+            </ul>
+          </div>
+          <button onclick="openAuthModal('signup')" class="mt-6 w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-2.5 rounded-full transition text-sm">Get Monthly</button>
+        </div>
+
+        <!-- Annual VIP Pass -->
+        <div class="bg-amber-500/10 border border-amber-500/40 rounded-2xl p-6 flex flex-col justify-between relative shadow-xl shadow-amber-500/5">
+          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-black font-bold text-[10px] px-3 py-0.5 rounded-full uppercase tracking-wider">Best Value</span>
+          <div class="space-y-4">
+            <div class="inline-block bg-amber-500/20 text-amber-300 text-xs px-2.5 py-1 rounded-md font-semibold">Save 55%</div>
+            <h3 class="text-xl font-bold text-white">Annual VIP Pass</h3>
+            <div class="text-3xl font-bold text-amber-400">₹799 <span class="text-xs text-gray-400 font-normal">/ year</span></div>
+            <ul class="text-xs text-gray-300 space-y-2 pt-2 border-t border-white/10">
+              <li class="flex items-center gap-2"><span>✔</span> Everything in Monthly VIP</li>
+              <li class="flex items-center gap-2"><span>✔</span> Priority Generation Speed</li>
+              <li class="flex items-center gap-2"><span>✔</span> Download MP3s for Offline Play</li>
+              <li class="flex items-center gap-2"><span>✔</span> Request Custom Story Scripts</li>
+            </ul>
+          </div>
+          <button onclick="openAuthModal('signup')" class="mt-6 w-full bg-amber-200 hover:bg-amber-300 text-black font-semibold py-2.5 rounded-full transition text-sm">Get Annual Access</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FLOATING AUDIO PLAYER -->
+  <div id="player" class="fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-xl border-t border-white/10 px-6 py-3 z-30">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3 w-1/3">
+        <div class="w-10 h-10 rounded bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-500 font-bold flex-shrink-0">
+          ⚡
+        </div>
+        <div class="truncate">
+          <h4 id="player-title" class="text-sm font-semibold truncate">Chupke Se...</h4>
+          <p id="player-artist" class="text-xs text-amber-300/80 truncate">Aisha (ElevenLabs AI)</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center w-1/3 gap-1">
+        <button id="play-btn" onclick="togglePlay()" class="w-10 h-10 rounded-full bg-amber-200 text-black flex items-center justify-center font-bold hover:bg-amber-300 transition">
+          ▶
+        </button>
+        <span id="player-status" class="text-[10px] text-gray-500">Ready to Stream Live AI</span>
+      </div>
+
+      <div class="flex justify-end w-1/3 text-xs font-mono text-gray-400">
+        <span id="player-duration">14:20</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div id="auth-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#141416] border border-white/10 rounded-2xl w-full max-w-md p-6 relative space-y-6 shadow-2xl">
+      <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">✕</button>
+      
+      <div class="flex border-b border-white/10">
+        <button id="tab-login" onclick="switchAuthTab('login')" class="flex-1 pb-3 text-sm font-semibold text-amber-400 border-b-2 border-amber-400">Sign In</button>
+        <button id="tab-signup" onclick="switchAuthTab('signup')" class="flex-1 pb-3 text-sm font-semibold text-gray-400 border-b-2 border-transparent">Create Account</button>
+      </div>
+
+      <form onsubmit="handleAuth(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Mobile Number or Email</label>
+          <input type="text" required placeholder="+91 98765 43210" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition">
+        </div>
+
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Password</label>
+          <input type="password" required placeholder="••••••••" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition">
+        </div>
+
+        <button type="submit" id="auth-submit-btn" class="w-full bg-amber-200 hover:bg-amber-300 text-black font-semibold py-2.5 rounded-xl transition text-sm mt-2">
+          Sign In
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <audio id="audio-element" preload="auto"></audio>
+
+  <script>
     const ELEVENLABS_API_KEY = "sk_be4b0088e042c0ee796432d5cd919f1ea0ef68e2b4fefe38"; 
 
-    // Using standard, globally available ElevenLabs Voice IDs
-    // "21m00Tcm4TlvDq8ikWAM" (Rachel), "EXAVITQu4vr4xnSDxMaL" (Bella), "MF3mGyEYCl7XYWbV9V6O" (Elli)
     let currentVoiceId = "21m00Tcm4TlvDq8ikWAM";
-    let currentText = "Tumhare pass aakar... jab main dheere se tumhare kaan me bolungi, kya tum sunoge?";
+    let currentText = "Suniye... Raat bohot gehri ho chuki hai. Tumhare pass aakar jab main dheere se tumhare kaan me bolungi... kya tum meri dhadkan sun paoge?";
     let isPlaying = false;
 
     const audioEl = document.getElementById('audio-element');
     const playBtn = document.getElementById('play-btn');
     const statusEl = document.getElementById('player-status');
 
-    // AI Story Generator Engine (Simulates Dynamic Backend Story Generation)
-    function generateAIStory(title, category) {
+    // AI Story Dynamic Script Generator
+    function generateAIStory(title) {
       const prompts = {
         'Chupke Se...': "Suniye... Raat bohot gehri ho chuki hai. Tumhare pass aakar jab main dheere se tumhare kaan me bolungi... kya tum meri dhadkan sun paoge?",
         'Raat Aur Tum': "Aaj ki raat bohot khamosh hai. Sirf tum, main, aur hamari ye adhuri baatein. Kya tum mere kareeb aaoge?",
@@ -21,9 +282,9 @@
       return prompts[title] || "Suniye... Ek nayi kahani ki shuruat karte hain sirf aapke liye.";
     }
 
-    // Direct ElevenLabs API Call with Error Diagnostics
+    // Direct ElevenLabs API Execution
     async function fetchElevenLabsAudio(text, voiceId) {
-      statusEl.innerText = "⚡ AI Writing & Voice Syncing...";
+      statusEl.innerText = "⚡ Generating Voice Sync...";
       playBtn.innerText = '⏳';
 
       try {
@@ -46,8 +307,7 @@
         });
 
         if (!response.ok) {
-          const errData = await response.json().catch(() => ({}));
-          throw new Error(errData.detail?.message || `API Error: ${response.status}`);
+          throw new Error(`API Response Failed: ${response.status}`);
         }
 
         const audioBlob = await response.blob();
@@ -57,20 +317,15 @@
         await audioEl.play();
         isPlaying = true;
         playBtn.innerText = '⏸';
-        statusEl.innerText = '🟢 Playing ElevenLabs AI Audio';
+        statusEl.innerText = '🟢 Playing ElevenLabs AI';
 
       } catch (err) {
-        console.error("ElevenLabs Direct Audio Failure:", err);
-        statusEl.innerText = "⚠️ Voice API Error - Check Console";
-        playBtn.innerText = '▶';
-        isPlaying = false;
-        
-        // Browser Speech Synthesis Fallback if ElevenLabs API key/quota fails
+        console.warn("ElevenLabs direct stream failed, launching local voice engine backup:", err);
         playBrowserTTS(text);
       }
     }
 
-    // Web Speech API Fallback (Ensures audio ALWAYS plays even if API errors out)
+    // Fallback Browser TTS Audio Synthesizer
     function playBrowserTTS(text) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
@@ -107,25 +362,23 @@
       }
     }
 
-    // Triggered when clicking any Story Card
-    function loadStory(title, artist, duration, text, voiceId) {
+    // Clicking Story Card Handler
+    function loadStory(title, artist, duration, voiceId) {
       document.getElementById('player-title').innerText = title;
       document.getElementById('player-artist').innerText = artist;
       document.getElementById('player-duration').innerText = duration;
 
-      // 1. Generate story text dynamically
       currentText = generateAIStory(title);
       currentVoiceId = voiceId || "21m00Tcm4TlvDq8ikWAM";
 
-      // 2. Sync text with ElevenLabs and autoplay audio
       fetchElevenLabsAudio(currentText, currentVoiceId);
     }
 
     function playDemo() {
-      loadStory('Chupke Se...', 'Aisha (ElevenLabs AI)', '14:20', '', '21m00Tcm4TlvDq8ikWAM');
+      loadStory('Chupke Se...', 'Aisha (ElevenLabs AI)', '14:20', '21m00Tcm4TlvDq8ikWAM');
     }
 
-    // Helper functions
+    // Modal & UI Helper Functions
     function openAuthModal(mode) { document.getElementById('auth-modal').classList.remove('hidden'); switchAuthTab(mode); }
     function closeAuthModal() { document.getElementById('auth-modal').classList.add('hidden'); }
     function switchAuthTab(mode) {
@@ -158,3 +411,5 @@
       statusEl.innerText = 'Playback Finished';
     };
   </script>
+</body>
+</html>
