@@ -43,7 +43,7 @@
   <!-- HERO SECTION -->
   <header class="px-6 pt-12 pb-8 text-center max-w-4xl mx-auto space-y-5">
     <div class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-amber-500 font-semibold px-3.5 py-1 bg-amber-500/10 rounded-full border border-amber-500/20">
-      <span>🪈 DESI FLUTE BGM & INDIAN GIRL VOICE</span>
+      <span>🪈 1,000 UNIQUE AI GIRL PORTRAITS & DESI STORIES</span>
       <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
     </div>
     <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
@@ -70,7 +70,7 @@
             <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span>
             1,000 Free Desi Stories
           </h2>
-          <p class="text-xs text-gray-400 mt-1">Normal Voice Speed • Indian Accent Girl Voices • Flute BGM</p>
+          <p class="text-xs text-gray-400 mt-1">Normal Voice Speed • Indian Accent Girl Voices • Dynamic AI Portraits</p>
         </div>
 
         <!-- Filter Category Tabs -->
@@ -84,7 +84,7 @@
 
       <!-- GRID CONTAINER -->
       <div class="story-card-container grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
-        <!-- JS renders 1,000 story cards -->
+        <!-- JS generates 1,000 unique story cards with dynamic AI girl avatars -->
       </div>
     </section>
   </main>
@@ -125,22 +125,6 @@
       { id: "MF3mGyEYCl7XYWbV9V6O", name: "Ananya (Warm Indian Accent)" }
     ];
 
-    // GUARANTEED FREE PUBLIC DOMAIN & CREATIVE COMMONS SAFE INDIAN PORTRAITS
-    const SAFE_INDIAN_GIRL_PHOTOS = [
-      "https://images.pexels.com/photos/2709388/pexels-photo-2709388.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&dpr=1",
-      "https://images.pexels.com/photos/2747267/pexels-photo-2747267.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&dpr=1",
-      "https://images.pexels.com/photos/2836486/pexels-photo-2836486.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&dpr=1",
-      "https://images.pexels.com/photos/3014856/pexels-photo-3014856.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&dpr=1",
-      "https://images.pexels.com/photos/2787341/pexels-photo-2787341.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&dpr=1",
-      "https://images.pexels.com/photos/341970/pexels-photo-341970.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&dpr=1",
-      "https://images.pexels.com/photos/1580271/pexels-photo-1580271.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&dpr=1",
-      "https://images.pexels.com/photos/2100063/pexels-photo-2100063.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&dpr=1",
-      "https://images.pexels.com/photos/2811089/pexels-photo-2811089.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&dpr=1",
-      "https://images.pexels.com/photos/2774197/pexels-photo-2774197.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&dpr=1"
-    ];
-
-    const FALLBACK_PHOTO = "https://images.pexels.com/photos/2709388/pexels-photo-2709388.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&dpr=1";
-
     const TITLES_P1 = ["Chandni", "Garam Chai", "Payal Ki", "Pahadi", "Bheegi", "Gulaabi", "Chupke Se", "Jhumka", "Nawabi", "Chhoti Si"];
     const TITLES_P2 = ["Raatein", "Tanhai", "Jhankar", "Hawa", "Mulaqat", "Shaam", "Sarsarahat", "Mohabbat", "Rukhsat", "Dhadkan"];
 
@@ -170,7 +154,7 @@
 
     const CATEGORIES = ["whisper", "romance", "mystery"];
 
-    // GENERATE 1,000 STORIES WITH SAFE FREE IMAGE PATHS
+    // GENERATE 1,000 UNIQUE DESI STORIES WITH DYNAMIC AI GIRL PORTRAITS
     const STORIES = [];
     for (let i = 1; i <= 1000; i++) {
       const p1 = TITLES_P1[i % TITLES_P1.length];
@@ -178,8 +162,8 @@
       const category = CATEGORIES[i % CATEGORIES.length];
       const voice = AI_VOICES[i % AI_VOICES.length];
 
-      // Safe portrait rotation
-      const photoUrl = SAFE_INDIAN_GIRL_PHOTOS[i % SAFE_INDIAN_GIRL_PHOTOS.length];
+      // DYNAMIC AI GIRL IMAGE GENERATION VIA DICEBEAR PERSONA API
+      const aiGirlPhoto = `https://api.dicebear.com/7.x/persona/svg?seed=indian-girl-${i}&backgroundColor=141416,1f1f23`;
 
       const script = STARTERS[i % STARTERS.length] +
                      MIDDLES[(i * 2) % MIDDLES.length] +
@@ -192,7 +176,7 @@
         voiceId: voice.id,
         duration: `${8 + (i % 12)}:${(i * 11) % 60 < 10 ? '0' : ''}${(i * 11) % 60}`,
         category: category,
-        image: photoUrl,
+        image: aiGirlPhoto,
         script: script
       });
     }
@@ -209,7 +193,7 @@
     bgmEl.volume = 0.12; 
     audioEl.playbackRate = 1.0;
 
-    // RENDER UI WITH ERROR-PROOF IMAGE HANDLING
+    // RENDER UI WITH FAILSAFE FALLBACK TO SECONDARY AI GENERATOR
     function renderStoriesUI() {
       const container = document.querySelector('.story-card-container');
       if (!container) return;
@@ -219,12 +203,12 @@
              onclick="playStoryById(${story.id})" 
              class="story-card bg-[#141416] border border-white/10 rounded-2xl p-3.5 hover:border-amber-500/60 transition cursor-pointer group flex flex-col justify-between">
           <div>
-            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-neutral-900">
+            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-[#1B1B1E] flex items-center justify-center p-2">
               <img src="${story.image}" 
-                   onerror="this.onerror=null; this.src='${FALLBACK_PHOTO}';"
+                   onerror="this.onerror=null; this.src='https://robohash.org/desigirl${story.id}?set=set5';"
                    loading="lazy" 
                    alt="${story.title}" 
-                   class="object-cover w-full h-full group-hover:scale-105 transition duration-300" />
+                   class="object-cover w-full h-full group-hover:scale-105 transition duration-300 rounded-lg" />
             </div>
             <h3 class="font-bold text-sm truncate group-hover:text-amber-400 serif">${story.title}</h3>
             <p class="text-[11px] text-amber-200/80 truncate mt-0.5">👩 ${story.voiceName}</p>
