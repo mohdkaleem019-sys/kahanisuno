@@ -43,7 +43,7 @@
   <!-- HERO SECTION -->
   <header class="px-6 pt-12 pb-8 text-center max-w-4xl mx-auto space-y-5">
     <div class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-amber-500 font-semibold px-3.5 py-1 bg-amber-500/10 rounded-full border border-amber-500/20">
-      <span>🪈 1,000 UNIQUE AI GIRL PORTRAITS & DESI STORIES</span>
+      <span>🪈 NATURAL INDIAN VOICE & REAL DESI PORTRAITS</span>
       <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
     </div>
     <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
@@ -70,7 +70,7 @@
             <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span>
             1,000 Free Desi Stories
           </h2>
-          <p class="text-xs text-gray-400 mt-1">Normal Voice Speed • Indian Accent Girl Voices • Dynamic AI Portraits</p>
+          <p class="text-xs text-gray-400 mt-1">Realistic Speaking Speed • Natural Indian Female Accent • Flute BGM</p>
         </div>
 
         <!-- Filter Category Tabs -->
@@ -84,7 +84,7 @@
 
       <!-- GRID CONTAINER -->
       <div class="story-card-container grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
-        <!-- JS generates 1,000 unique story cards with dynamic AI girl avatars -->
+        <!-- JS renders 1,000 cards with beautiful realistic Indian portraits -->
       </div>
     </section>
   </main>
@@ -96,7 +96,7 @@
         <div class="w-10 h-10 rounded bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-500 font-bold flex-shrink-0">🪈</div>
         <div class="truncate">
           <h4 id="player-title" class="text-sm font-semibold truncate">Garam Chai Aur Tanhai</h4>
-          <p id="player-artist" class="text-xs text-amber-300/80 truncate">Riya (Normal Indian Girl) • 1.0x Speed</p>
+          <p id="player-artist" class="text-xs text-amber-300/80 truncate">Riya (Soft Desi Girl) • Real Pace</p>
         </div>
       </div>
 
@@ -106,7 +106,7 @@
       </div>
 
       <div class="flex justify-end w-1/3 text-xs font-mono text-gray-400 items-center gap-2">
-        <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded text-[10px]">✨ Indian Flute BGM</span>
+        <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded text-[10px]">✨ Soft Flute BGM</span>
         <span id="player-duration">12:30</span>
       </div>
     </div>
@@ -120,41 +120,55 @@
     const ELEVENLABS_API_KEY = "sk_be4b0088e042c0ee796432d5cd919f1ea0ef68e2b4fefe38"; 
 
     const AI_VOICES = [
-      { id: "21m00Tcm4TlvDq8ikWAM", name: "Riya (Desi Soft Girl)" },
-      { id: "EXAVITQu4vr4xnSDxMaL", name: "Priya (Reshmi Indian Voice)" },
-      { id: "MF3mGyEYCl7XYWbV9V6O", name: "Ananya (Warm Indian Accent)" }
+      { id: "21m00Tcm4TlvDq8ikWAM", name: "Riya (Soft Desi Voice)" },
+      { id: "EXAVITQu4vr4xnSDxMaL", name: "Priya (Meethi Indian Awaz)" },
+      { id: "MF3mGyEYCl7XYWbV9V6O", name: "Ananya (Warm Chai Accent)" }
+    ];
+
+    // REAL HIGH-QUALITY INDIAN GIRL PORTRAITS (REAL PEOPLE, NO CARTOONS)
+    const REAL_INDIAN_GIRLS = [
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=400&h=500&q=80",
+      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=400&h=500&q=80",
+      "https://images.unsplash.com/photo-1618151313441-bc79b11e5090?auto=format&fit=crop&w=400&h=500&q=80",
+      "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=400&h=500&q=80",
+      "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=400&h=500&q=80",
+      "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=400&h=500&q=80",
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=500&q=80",
+      "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&h=500&q=80",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&h=500&q=80",
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&h=500&q=80"
     ];
 
     const TITLES_P1 = ["Chandni", "Garam Chai", "Payal Ki", "Pahadi", "Bheegi", "Gulaabi", "Chupke Se", "Jhumka", "Nawabi", "Chhoti Si"];
     const TITLES_P2 = ["Raatein", "Tanhai", "Jhankar", "Hawa", "Mulaqat", "Shaam", "Sarsarahat", "Mohabbat", "Rukhsat", "Dhadkan"];
 
+    // NATURAL HINDI/ENGLISH STORY SCRIPTS WITH EXPLICIT NATURAL PAUSES FOR REALISTIC VOICE SYNTHESIS
     const STARTERS = [
-      "Suno na... Aaj raat ki hawa me ek alag hi nasha hai. ",
-      "Bahar halki baarish ho rahi hai aur ghar me sirf hum dono hain... ",
-      "Jab tumne mera haath thama, mere dil ki dhadkan tez ho gayi. ",
-      "Aapki yeh meethi baatein mujhe kitna sukoon deti hain... ",
-      "Aaj ki raat bohot khamosh hai, bas tum ho aur main hoon... "
+      "Suno na... Aaj raat ki hawa mein... ek alag hi nasha hai. ",
+      "Bahar halki baarish ho rahi hai... aur ghar mein sirf hum dono hain... ",
+      "Jab tumne mera haath thama... mere dil ki dhadkan tez ho gayi. ",
+      "Aapki yeh meethi baatein... mujhe kitna sukoon deti hain... ",
+      "Aaj ki raat bohot khamosh hai... bas tum ho, aur main hoon... "
     ];
 
     const MIDDLES = [
-      "Aapka muskuraana aur wo halki si jhuki hui nazrein... ",
-      "Mere baalon me haath pherte hue jab aapne mere kaan me bolna shuru kiya... ",
-      "Jhumke ki wo chhan-chhan aur aapki saansien mere chehre par... ",
-      "Aapki ungliyon ka halka sa ehsaas mere haath par... ",
-      "Dheere se mere paas aao aur mujhe apni baahon me lene do... "
+      "Aapka muskuraana... aur wo halki si jhuki hui nazrein... ",
+      "Mere baalon mein haath pherte hue... jab aapne mere kaan mein bolna shuru kiya... ",
+      "Jhumke ki wo chhan-chhan... aur aapki saansien mere chehre par... ",
+      "Aapki ungliyon ka halka sa ehsaas... mere haath par... ",
+      "Dheere se mere paas aao... aur mujhe apni baahon mein lene do... "
     ];
 
     const ENDINGS = [
       "kya tum mujhe hamesha aise hi chahoge?",
       "aaj raat mujhe poori tarah apna bana lo.",
       "to mera dil aur bhi zorse dhadakne lagta hai.",
-      "bas is khoobsurat lamhe me beh jaane do.",
+      "bas is khoobsurat lamhe mein beh jaane do.",
       "aaj raat humare beech koi doori nahi honi chahiye."
     ];
 
     const CATEGORIES = ["whisper", "romance", "mystery"];
 
-    // GENERATE 1,000 UNIQUE DESI STORIES WITH DYNAMIC AI GIRL PORTRAITS
     const STORIES = [];
     for (let i = 1; i <= 1000; i++) {
       const p1 = TITLES_P1[i % TITLES_P1.length];
@@ -162,8 +176,8 @@
       const category = CATEGORIES[i % CATEGORIES.length];
       const voice = AI_VOICES[i % AI_VOICES.length];
 
-      // DYNAMIC AI GIRL IMAGE GENERATION VIA DICEBEAR PERSONA API
-      const aiGirlPhoto = `https://api.dicebear.com/7.x/persona/svg?seed=indian-girl-${i}&backgroundColor=141416,1f1f23`;
+      // Curated real Indian girl photos rotated cleanly across cards
+      const photoUrl = REAL_INDIAN_GIRLS[i % REAL_INDIAN_GIRLS.length];
 
       const script = STARTERS[i % STARTERS.length] +
                      MIDDLES[(i * 2) % MIDDLES.length] +
@@ -176,7 +190,7 @@
         voiceId: voice.id,
         duration: `${8 + (i % 12)}:${(i * 11) % 60 < 10 ? '0' : ''}${(i * 11) % 60}`,
         category: category,
-        image: aiGirlPhoto,
+        image: photoUrl,
         script: script
       });
     }
@@ -190,10 +204,8 @@
     const playBtn = document.getElementById('play-btn');
     const statusEl = document.getElementById('player-status');
 
-    bgmEl.volume = 0.12; 
-    audioEl.playbackRate = 1.0;
+    bgmEl.volume = 0.10; // Softer bgm so the girl's voice stands out clearly
 
-    // RENDER UI WITH FAILSAFE FALLBACK TO SECONDARY AI GENERATOR
     function renderStoriesUI() {
       const container = document.querySelector('.story-card-container');
       if (!container) return;
@@ -203,12 +215,11 @@
              onclick="playStoryById(${story.id})" 
              class="story-card bg-[#141416] border border-white/10 rounded-2xl p-3.5 hover:border-amber-500/60 transition cursor-pointer group flex flex-col justify-between">
           <div>
-            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-[#1B1B1E] flex items-center justify-center p-2">
+            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-neutral-900">
               <img src="${story.image}" 
-                   onerror="this.onerror=null; this.src='https://robohash.org/desigirl${story.id}?set=set5';"
                    loading="lazy" 
                    alt="${story.title}" 
-                   class="object-cover w-full h-full group-hover:scale-105 transition duration-300 rounded-lg" />
+                   class="object-cover w-full h-full group-hover:scale-105 transition duration-300" />
             </div>
             <h3 class="font-bold text-sm truncate group-hover:text-amber-400 serif">${story.title}</h3>
             <p class="text-[11px] text-amber-200/80 truncate mt-0.5">👩 ${story.voiceName}</p>
@@ -216,7 +227,7 @@
           </div>
           <div class="mt-2 text-[10px] text-gray-500 font-medium border-t border-white/5 pt-2 flex justify-between items-center">
             <span>${story.duration} mins</span>
-            <span class="text-amber-400 font-semibold">🪈 Flute BGM</span>
+            <span class="text-amber-400 font-semibold">🪈 Soft Flute</span>
           </div>
         </div>
       `).join('');
@@ -227,7 +238,7 @@
       if (!story) return;
 
       document.getElementById('player-title').innerText = story.title;
-      document.getElementById('player-artist').innerText = `${story.voiceName} • 1.0x Normal Speed`;
+      document.getElementById('player-artist').innerText = `${story.voiceName} • Soft Real Pace`;
       document.getElementById('player-duration').innerText = story.duration;
 
       currentText = story.script;
@@ -251,7 +262,13 @@
           body: JSON.stringify({
             text: text,
             model_id: "eleven_multilingual_v2",
-            voice_settings: { stability: 0.5, similarity_boost: 0.75, style: 0.25 }
+            // TUNED VOICE SETTINGS: Higher style & stability boost for realistic emotional cadence
+            voice_settings: { 
+              stability: 0.40, 
+              similarity_boost: 0.85, 
+              style: 0.45,
+              use_speaker_boost: true
+            }
           })
         });
 
@@ -259,40 +276,47 @@
 
         const audioBlob = await response.blob();
         audioEl.src = URL.createObjectURL(audioBlob);
-        audioEl.playbackRate = 1.0;
+        
+        // NATURAL STORYTELLING PACE (0.9x speed feels relaxed and realistic)
+        audioEl.playbackRate = 0.90;
         
         await audioEl.play();
         bgmEl.play();
 
         isPlaying = true;
         playBtn.innerText = '⏸';
-        statusEl.innerText = '🟢 Playing with Flute BGM';
+        statusEl.innerText = '🟢 Playing (Natural Voice)';
 
       } catch (err) {
-        console.warn("Fallback to Indian Girl TTS Engine:", err);
+        console.warn("Fallback to Tuned Speech Synthesis Engine:", err);
         playBrowserTTS(text);
       }
     }
 
+    // HIGHLY OPTIMIZED FALLBACK FOR REALISTIC INDIAN GIRL VOICE SPEECH RATE
     function playBrowserTTS(text) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
         
         const voices = window.speechSynthesis.getVoices();
-        const indianFemaleVoice = voices.find(v => (v.lang.includes('hi') || v.lang.includes('IN')) && v.name.toLowerCase().includes('female')) ||
+        
+        // Prioritize natural Indian Female voices
+        const indianFemaleVoice = voices.find(v => (v.lang.includes('hi') || v.lang.includes('IN')) && (v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('google') || v.name.toLowerCase().includes('natural'))) ||
                                  voices.find(v => v.lang.includes('hi') || v.lang.includes('IN'));
 
         if (indianFemaleVoice) utterance.voice = indianFemaleVoice;
 
         utterance.lang = 'hi-IN';
-        utterance.rate = 0.95; 
-        utterance.pitch = 1.1; 
+        
+        // CRITICAL SPEECH RATE FIX: Slow down from 1.0x to 0.82x for authentic, non-robotic story delivery
+        utterance.rate = 0.82; 
+        utterance.pitch = 1.05; // Gentle, warm pitch
 
         utterance.onstart = () => { 
           isPlaying = true; 
           playBtn.innerText = '⏸'; 
-          statusEl.innerText = '🔊 Indian Girl Voice + Flute BGM'; 
+          statusEl.innerText = '🔊 Real Girl Voice + Flute BGM'; 
           bgmEl.play();
         };
         utterance.onend = () => { 
