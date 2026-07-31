@@ -55,16 +55,15 @@
       Experience ultra-expressive, tempting Hindi & Hinglish audio narrations with live ElevenLabs voice generation.
     </p>
 
-    <!-- ACTION BUTTONS -->
     <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
       <button onclick="playDemo()" class="bg-amber-200 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition flex items-center gap-2 pulse-ring">
-        <span>🎙️</span> Play ElevenLabs Sample
+        <span>🎙️</span> Play Sample
       </button>
       <a href="#pricing" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 px-6 py-3 rounded-full font-semibold hover:bg-amber-500/20 transition flex items-center gap-2">
         <span>⚡</span> Unlock All AI Voices
       </a>
       <a href="#stories" class="border border-white/20 px-6 py-3 rounded-full font-semibold hover:bg-white/5 transition">
-        Browse Stories
+        Browse All Stories
       </a>
     </div>
   </header>
@@ -72,16 +71,16 @@
   <!-- STORIES SECTION -->
   <main id="stories" class="max-w-7xl mx-auto px-6 space-y-16 mt-8">
     <section>
-      <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
         <div>
           <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
             <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span>
-            1,000+ AI Female Narrations
+            All 1,000 AI Stories
           </h2>
           <p class="text-xs text-gray-400 mt-1">Deep, tempting Hindi & Hinglish vocal tracks</p>
         </div>
 
-        <!-- Category Filter Tabs -->
+        <!-- Filter Category Tabs -->
         <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
           <button onclick="filterCategory(this, 'all')" class="category-btn bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">All Stories</button>
           <button onclick="filterCategory(this, 'whisper')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Whisper & Sensual</button>
@@ -90,9 +89,9 @@
         </div>
       </div>
 
-      <!-- DYNAMIC STORY CARDS CONTAINER -->
-      <div class="story-card-container flex gap-5 overflow-x-auto pb-4 no-scrollbar">
-        <!-- 1,000 Stories rendered here automatically -->
+      <!-- GRID LAYOUT FOR 1000 CARDS -->
+      <div class="story-card-container grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+        <!-- 1,000 Stories rendered here in a grid -->
       </div>
     </section>
 
@@ -123,7 +122,7 @@
             <h3 class="text-xl font-bold">Monthly VIP Pass</h3>
             <div class="text-3xl font-bold text-amber-400">₹149 <span class="text-xs text-gray-400 font-normal">/ month</span></div>
             <ul class="text-xs text-gray-300 space-y-2 pt-2 border-t border-white/10">
-              <li class="flex items-center gap-2"><span>✔</span> Unlimited ElevenLabs Voice Playback</li>
+              <li class="flex items-center gap-2"><span>✔</span> Unlimited ElevenLabs Playback</li>
               <li class="flex items-center gap-2"><span>✔</span> High Bitrate Audio Quality</li>
             </ul>
           </div>
@@ -196,14 +195,12 @@
   <script>
     const ELEVENLABS_API_KEY = "sk_be4b0088e042c0ee796432d5cd919f1ea0ef68e2b4fefe38"; 
 
-    // Global available ElevenLabs Voices
     const AI_VOICES = [
       { id: "21m00Tcm4TlvDq8ikWAM", name: "Aisha (AI Voice)" },
       { id: "EXAVITQu4vr4xnSDxMaL", name: "Simran (AI Velvet)" },
       { id: "MF3mGyEYCl7XYWbV9V6O", name: "Maya (AI Deep Tone)" }
     ];
 
-    // High Quality Visual Cover Images Array
     const IMAGES = [
       "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop",
@@ -217,7 +214,6 @@
       "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=600&auto=format&fit=crop"
     ];
 
-    // Procedural Title & Script Generator
     const TITLES_P1 = ["Raat Ki", "Chupke Se", "Ehsaas", "Dil Ki", "Khamosh", "Suno", "Aakhri", "Mehka", "Dheere Se", "Gahra"];
     const TITLES_P2 = ["Dhadkan", "Sarsarahat", "Aahat", "Pyaar", "Mulakaat", "Baatein", "Tanhai", "Chaahat", "Khwab", "Nasha"];
 
@@ -247,7 +243,7 @@
 
     const CATEGORIES = ["whisper", "romance", "mystery"];
 
-    // GENERATE 1,000 STORIES IN MEMORY
+    // GENERATE ALL 1,000 STORIES
     const STORIES = [];
     for (let i = 1; i <= 1000; i++) {
       const p1 = TITLES_P1[i % TITLES_P1.length];
@@ -280,23 +276,25 @@
     const playBtn = document.getElementById('play-btn');
     const statusEl = document.getElementById('player-status');
 
-    // Render Stories to DOM
-    function renderStoriesUI(limit = 60) {
+    // RENDER ALL 1000 STORIES TO DOM
+    function renderStoriesUI(limit = 1000) {
       const container = document.querySelector('.story-card-container');
       if (!container) return;
 
       container.innerHTML = STORIES.slice(0, limit).map(story => `
         <div data-category="${story.category}" 
              onclick="playStoryById(${story.id})" 
-             class="story-card flex-none w-52 bg-[#141416] border border-white/10 rounded-2xl p-3.5 hover:border-amber-500/40 transition cursor-pointer group">
-          <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-neutral-900">
-            <img src="${story.image}" class="object-cover w-full h-full group-hover:scale-105 transition duration-300" />
-            <span class="absolute top-2 right-2 bg-black/80 text-[10px] text-amber-400 font-bold px-2 py-0.5 rounded border border-amber-500/30">AI #${story.id}</span>
+             class="story-card bg-[#141416] border border-white/10 rounded-2xl p-3.5 hover:border-amber-500/40 transition cursor-pointer group flex flex-col justify-between">
+          <div>
+            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-neutral-900">
+              <img src="${story.image}" class="object-cover w-full h-full group-hover:scale-105 transition duration-300" />
+              <span class="absolute top-2 right-2 bg-black/80 text-[10px] text-amber-400 font-bold px-2 py-0.5 rounded border border-amber-500/30">AI #${story.id}</span>
+            </div>
+            <h3 class="font-bold text-sm truncate group-hover:text-amber-400 serif">${story.title}</h3>
+            <p class="text-[11px] text-amber-200/80 truncate mt-0.5">✨ ${story.voiceName}</p>
+            <p class="text-[10px] text-gray-400 italic line-clamp-2 mt-1">"${story.script}"</p>
           </div>
-          <h3 class="font-bold text-base truncate group-hover:text-amber-400 serif">${story.title}</h3>
-          <p class="text-xs text-amber-200/80 truncate mt-1">✨ ${story.voiceName}</p>
-          <p class="text-[11px] text-gray-400 italic line-clamp-2 mt-1.5">"${story.script}"</p>
-          <div class="mt-2 text-xs text-gray-500 font-medium">${story.duration} mins • ${story.category}</div>
+          <div class="mt-2 text-[10px] text-gray-500 font-medium border-t border-white/5 pt-2">${story.duration} mins • ${story.category}</div>
         </div>
       `).join('');
     }
@@ -376,7 +374,6 @@
       playStoryById(1);
     }
 
-    // Modal Helpers
     function openAuthModal(mode) { document.getElementById('auth-modal').classList.remove('hidden'); switchAuthTab(mode); }
     function closeAuthModal() { document.getElementById('auth-modal').classList.add('hidden'); }
     function switchAuthTab(mode) {
@@ -405,7 +402,7 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      renderStoriesUI(60);
+      renderStoriesUI(1000);
     });
 
     audioEl.onended = () => { isPlaying = false; playBtn.innerText = '▶'; statusEl.innerText = 'Finished'; };
