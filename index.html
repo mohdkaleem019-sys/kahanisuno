@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KahaniSuno - AI Intimate Audio Stories</title>
+  <title>KahaniSuno - Free AI Intimate Audio Stories</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -32,116 +32,59 @@
       <span class="text-xl font-bold tracking-wide serif">KahaniSuno <span class="text-xs text-amber-500 font-sans px-2 py-0.5 bg-amber-500/10 rounded-full border border-amber-500/20">AI</span></span>
     </a>
     <div class="hidden md:flex items-center space-x-8 text-sm text-gray-400">
-      <a href="#stories" class="hover:text-amber-500 transition">Stories</a>
-      <a href="#pricing" class="hover:text-amber-500 transition">Pricing</a>
+      <a href="#stories" class="hover:text-amber-500 transition">All Stories</a>
+      <span class="text-emerald-400 font-medium">100% Free Access</span>
     </div>
     <div class="flex items-center space-x-4">
-      <button onclick="openAuthModal('login')" class="text-sm text-gray-300 hover:text-white font-medium">Sign In</button>
-      <button onclick="openAuthModal('signup')" class="bg-amber-200 text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-amber-300 transition">Start Free</button>
+      <a href="#stories" class="bg-amber-200 text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-amber-300 transition">Listen Free</a>
     </div>
   </nav>
 
   <!-- HERO SECTION -->
-  <header class="px-6 pt-16 pb-12 text-center max-w-4xl mx-auto space-y-6">
+  <header class="px-6 pt-12 pb-8 text-center max-w-4xl mx-auto space-y-5">
     <div class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-amber-500 font-semibold px-3.5 py-1 bg-amber-500/10 rounded-full border border-amber-500/20">
-      <span>✨ ELEVENLABS AI VOICE LIVE</span>
+      <span>✨ 1,000 FREE STORIES LIVE</span>
       <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
     </div>
     <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
-      Suniye Intimate Kahaniyaan <br class="hidden md:inline"/> AI Sensual Female Voices Mein
+      Suniye Intimate Kahaniyaan <br class="hidden md:inline"/> Free Audio Stories
     </h1>
-    <p class="text-amber-200/80 italic text-lg serif">Whispered Intimacy, Powered by ElevenLabs API</p>
-    <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto">
-      Experience ultra-expressive, tempting Hindi & Hinglish audio narrations with live ElevenLabs voice generation.
-    </p>
-
+    <p class="text-amber-200/80 italic text-lg serif">Whispered Intimacy in Normal Speed Voice</p>
+    
     <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
       <button onclick="playDemo()" class="bg-amber-200 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition flex items-center gap-2 pulse-ring">
-        <span>🎙️</span> Play Sample
+        <span>🎙️</span> Play Random Story
       </button>
-      <a href="#pricing" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 px-6 py-3 rounded-full font-semibold hover:bg-amber-500/20 transition flex items-center gap-2">
-        <span>⚡</span> Unlock All AI Voices
-      </a>
       <a href="#stories" class="border border-white/20 px-6 py-3 rounded-full font-semibold hover:bg-white/5 transition">
-        Browse All Stories
+        Explore 1,000 Stories
       </a>
     </div>
   </header>
 
   <!-- STORIES SECTION -->
-  <main id="stories" class="max-w-7xl mx-auto px-6 space-y-16 mt-8">
+  <main id="stories" class="max-w-7xl mx-auto px-6 space-y-8 mt-4">
     <section>
-      <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 border-b border-white/10 pb-4">
         <div>
           <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
             <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span>
-            All 1,000 AI Stories
+            All 1,000 Free Stories
           </h2>
-          <p class="text-xs text-gray-400 mt-1">Deep, tempting Hindi & Hinglish vocal tracks</p>
+          <p class="text-xs text-gray-400 mt-1">Free listening • Normal voice speed (1.0x)</p>
         </div>
 
         <!-- Filter Category Tabs -->
         <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterCategory(this, 'all')" class="category-btn bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">All Stories</button>
+          <button onclick="filterCategory(this, 'all')" class="category-btn bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">All Stories (1000)</button>
           <button onclick="filterCategory(this, 'whisper')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Whisper & Sensual</button>
           <button onclick="filterCategory(this, 'romance')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Deep Romance</button>
           <button onclick="filterCategory(this, 'mystery')" class="category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Midnight Mystery</button>
         </div>
       </div>
 
-      <!-- GRID LAYOUT FOR 1000 CARDS -->
+      <!-- GRID CONTAINER: ALL 1,000 CARDS RENDER HERE -->
       <div class="story-card-container grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
-        <!-- 1,000 Stories rendered here in a grid -->
-      </div>
-    </section>
-
-    <!-- PRICING SECTION -->
-    <section id="pricing" class="pt-8 border-t border-white/10">
-      <div class="text-center max-w-xl mx-auto mb-10 space-y-2">
-        <h2 class="text-2xl md:text-3xl font-bold">Unlimited AI Audio Access</h2>
-        <p class="text-gray-400 text-sm">Choose pay-per-episode coins or unlimited AI story VIP passes.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-amber-500/30 transition">
-          <div class="space-y-4">
-            <div class="inline-block bg-amber-500/10 text-amber-400 text-xs px-2.5 py-1 rounded-md font-semibold border border-amber-500/20">Pay As You Go</div>
-            <h3 class="text-xl font-bold">Coin Pack</h3>
-            <div class="text-3xl font-bold text-white">₹49 <span class="text-xs text-gray-400 font-normal">/ 50 Coins</span></div>
-            <ul class="text-xs text-gray-300 space-y-2 pt-2 border-t border-white/10">
-              <li class="flex items-center gap-2"><span>✔</span> Unlock 10 AI Episodes</li>
-              <li class="flex items-center gap-2"><span>✔</span> Coins never expire</li>
-            </ul>
-          </div>
-          <button onclick="openAuthModal('signup')" class="mt-6 w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-2.5 rounded-full transition text-sm">Buy Coins</button>
-        </div>
-
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-amber-500/30 transition">
-          <div class="space-y-4">
-            <div class="inline-block bg-amber-500/10 text-amber-400 text-xs px-2.5 py-1 rounded-md font-semibold border border-amber-500/20">Most Popular</div>
-            <h3 class="text-xl font-bold">Monthly VIP Pass</h3>
-            <div class="text-3xl font-bold text-amber-400">₹149 <span class="text-xs text-gray-400 font-normal">/ month</span></div>
-            <ul class="text-xs text-gray-300 space-y-2 pt-2 border-t border-white/10">
-              <li class="flex items-center gap-2"><span>✔</span> Unlimited ElevenLabs Playback</li>
-              <li class="flex items-center gap-2"><span>✔</span> High Bitrate Audio Quality</li>
-            </ul>
-          </div>
-          <button onclick="openAuthModal('signup')" class="mt-6 w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-2.5 rounded-full transition text-sm">Get Monthly</button>
-        </div>
-
-        <div class="bg-amber-500/10 border border-amber-500/40 rounded-2xl p-6 flex flex-col justify-between relative shadow-xl shadow-amber-500/5">
-          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-black font-bold text-[10px] px-3 py-0.5 rounded-full uppercase tracking-wider">Best Value</span>
-          <div class="space-y-4">
-            <div class="inline-block bg-amber-500/20 text-amber-300 text-xs px-2.5 py-1 rounded-md font-semibold">Save 55%</div>
-            <h3 class="text-xl font-bold text-white">Annual VIP Pass</h3>
-            <div class="text-3xl font-bold text-amber-400">₹799 <span class="text-xs text-gray-400 font-normal">/ year</span></div>
-            <ul class="text-xs text-gray-300 space-y-2 pt-2 border-t border-white/10">
-              <li class="flex items-center gap-2"><span>✔</span> Everything in Monthly VIP</li>
-              <li class="flex items-center gap-2"><span>✔</span> Download MP3s for Offline Play</li>
-            </ul>
-          </div>
-          <button onclick="openAuthModal('signup')" class="mt-6 w-full bg-amber-200 hover:bg-amber-300 text-black font-semibold py-2.5 rounded-full transition text-sm">Get Annual Access</button>
-        </div>
+        <!-- JavaScript loads all 1000 cards in grid layout -->
       </div>
     </section>
   </main>
@@ -153,40 +96,19 @@
         <div class="w-10 h-10 rounded bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-500 font-bold flex-shrink-0">⚡</div>
         <div class="truncate">
           <h4 id="player-title" class="text-sm font-semibold truncate">Raat Ki Dhadkan #1</h4>
-          <p id="player-artist" class="text-xs text-amber-300/80 truncate">Aisha (AI Voice)</p>
+          <p id="player-artist" class="text-xs text-amber-300/80 truncate">Aisha (AI Voice) • Normal Speed</p>
         </div>
       </div>
 
       <div class="flex flex-col items-center w-1/3 gap-1">
         <button id="play-btn" onclick="togglePlay()" class="w-10 h-10 rounded-full bg-amber-200 text-black flex items-center justify-center font-bold hover:bg-amber-300 transition">▶</button>
-        <span id="player-status" class="text-[10px] text-gray-500">Ready to Stream</span>
+        <span id="player-status" class="text-[10px] text-gray-400">Ready (Free Stream)</span>
       </div>
 
-      <div class="flex justify-end w-1/3 text-xs font-mono text-gray-400">
+      <div class="flex justify-end w-1/3 text-xs font-mono text-gray-400 items-center gap-2">
+        <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">1.0x Speed</span>
         <span id="player-duration">14:20</span>
       </div>
-    </div>
-  </div>
-
-  <!-- AUTH MODAL -->
-  <div id="auth-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-[#141416] border border-white/10 rounded-2xl w-full max-w-md p-6 relative space-y-6 shadow-2xl">
-      <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">✕</button>
-      <div class="flex border-b border-white/10">
-        <button id="tab-login" onclick="switchAuthTab('login')" class="flex-1 pb-3 text-sm font-semibold text-amber-400 border-b-2 border-amber-400">Sign In</button>
-        <button id="tab-signup" onclick="switchAuthTab('signup')" class="flex-1 pb-3 text-sm font-semibold text-gray-400 border-b-2 border-transparent">Create Account</button>
-      </div>
-      <form onsubmit="handleAuth(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs text-gray-400 mb-1">Mobile Number or Email</label>
-          <input type="text" required placeholder="+91 98765 43210" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition">
-        </div>
-        <div>
-          <label class="block text-xs text-gray-400 mb-1">Password</label>
-          <input type="password" required placeholder="••••••••" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition">
-        </div>
-        <button type="submit" id="auth-submit-btn" class="w-full bg-amber-200 hover:bg-amber-300 text-black font-semibold py-2.5 rounded-xl transition text-sm mt-2">Sign In</button>
-      </form>
     </div>
   </div>
 
@@ -243,7 +165,7 @@
 
     const CATEGORIES = ["whisper", "romance", "mystery"];
 
-    // GENERATE ALL 1,000 STORIES
+    // GENERATE ALL 1,000 STORIES IN MEMORY
     const STORIES = [];
     for (let i = 1; i <= 1000; i++) {
       const p1 = TITLES_P1[i % TITLES_P1.length];
@@ -276,25 +198,32 @@
     const playBtn = document.getElementById('play-btn');
     const statusEl = document.getElementById('player-status');
 
-    // RENDER ALL 1000 STORIES TO DOM
-    function renderStoriesUI(limit = 1000) {
+    // LOCK AUDIO TO NORMAL SPEED (1.0x)
+    audioEl.playbackRate = 1.0;
+    audioEl.defaultPlaybackRate = 1.0;
+
+    // RENDER ALL 1,000 STORIES AT ONCE
+    function renderStoriesUI() {
       const container = document.querySelector('.story-card-container');
       if (!container) return;
 
-      container.innerHTML = STORIES.slice(0, limit).map(story => `
+      container.innerHTML = STORIES.map(story => `
         <div data-category="${story.category}" 
              onclick="playStoryById(${story.id})" 
              class="story-card bg-[#141416] border border-white/10 rounded-2xl p-3.5 hover:border-amber-500/40 transition cursor-pointer group flex flex-col justify-between">
           <div>
             <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3 bg-neutral-900">
-              <img src="${story.image}" class="object-cover w-full h-full group-hover:scale-105 transition duration-300" />
-              <span class="absolute top-2 right-2 bg-black/80 text-[10px] text-amber-400 font-bold px-2 py-0.5 rounded border border-amber-500/30">AI #${story.id}</span>
+              <img src="${story.image}" loading="lazy" class="object-cover w-full h-full group-hover:scale-105 transition duration-300" />
+              <span class="absolute top-2 right-2 bg-emerald-500/90 text-[9px] text-black font-bold px-1.5 py-0.5 rounded">FREE</span>
             </div>
             <h3 class="font-bold text-sm truncate group-hover:text-amber-400 serif">${story.title}</h3>
             <p class="text-[11px] text-amber-200/80 truncate mt-0.5">✨ ${story.voiceName}</p>
             <p class="text-[10px] text-gray-400 italic line-clamp-2 mt-1">"${story.script}"</p>
           </div>
-          <div class="mt-2 text-[10px] text-gray-500 font-medium border-t border-white/5 pt-2">${story.duration} mins • ${story.category}</div>
+          <div class="mt-2 text-[10px] text-gray-500 font-medium border-t border-white/5 pt-2 flex justify-between items-center">
+            <span>${story.duration} mins</span>
+            <span class="text-emerald-400 font-semibold">Free</span>
+          </div>
         </div>
       `).join('');
     }
@@ -304,7 +233,7 @@
       if (!story) return;
 
       document.getElementById('player-title').innerText = story.title;
-      document.getElementById('player-artist').innerText = story.voiceName;
+      document.getElementById('player-artist').innerText = `${story.voiceName} • Normal Speed`;
       document.getElementById('player-duration').innerText = story.duration;
 
       currentText = story.script;
@@ -314,7 +243,7 @@
     }
 
     async function fetchElevenLabsAudio(text, voiceId) {
-      statusEl.innerText = "⚡ Generating Voice Sync...";
+      statusEl.innerText = "⚡ Loading Audio...";
       playBtn.innerText = '⏳';
 
       try {
@@ -336,10 +265,14 @@
 
         const audioBlob = await response.blob();
         audioEl.src = URL.createObjectURL(audioBlob);
+        
+        // ENSURE 1.0x PLAYBACK SPEED
+        audioEl.playbackRate = 1.0;
+        
         await audioEl.play();
         isPlaying = true;
         playBtn.innerText = '⏸';
-        statusEl.innerText = '🟢 Playing ElevenLabs AI';
+        statusEl.innerText = '🟢 Playing (Normal Speed)';
 
       } catch (err) {
         console.warn("Fallback to Browser Speech Engine:", err);
@@ -352,7 +285,11 @@
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'hi-IN';
-        utterance.onstart = () => { isPlaying = true; playBtn.innerText = '⏸'; statusEl.innerText = '🔊 Playing Audio'; };
+        
+        // SET NORMAL SPEED (1.0)
+        utterance.rate = 1.0; 
+        
+        utterance.onstart = () => { isPlaying = true; playBtn.innerText = '⏸'; statusEl.innerText = '🔊 Playing Normal Speed'; };
         utterance.onend = () => { isPlaying = false; playBtn.innerText = '▶'; statusEl.innerText = 'Ready'; };
         window.speechSynthesis.speak(utterance);
       }
@@ -371,26 +308,9 @@
     }
 
     function playDemo() {
-      playStoryById(1);
+      const randomId = Math.floor(Math.random() * 1000) + 1;
+      playStoryById(randomId);
     }
-
-    function openAuthModal(mode) { document.getElementById('auth-modal').classList.remove('hidden'); switchAuthTab(mode); }
-    function closeAuthModal() { document.getElementById('auth-modal').classList.add('hidden'); }
-    function switchAuthTab(mode) {
-      const tabLogin = document.getElementById('tab-login');
-      const tabSignup = document.getElementById('tab-signup');
-      const submitBtn = document.getElementById('auth-submit-btn');
-      if (mode === 'login') {
-        tabLogin.className = "flex-1 pb-3 text-sm font-semibold text-amber-400 border-b-2 border-amber-400";
-        tabSignup.className = "flex-1 pb-3 text-sm font-semibold text-gray-400 border-b-2 border-transparent";
-        submitBtn.innerText = "Sign In";
-      } else {
-        tabSignup.className = "flex-1 pb-3 text-sm font-semibold text-amber-400 border-b-2 border-amber-400";
-        tabLogin.className = "flex-1 pb-3 text-sm font-semibold text-gray-400 border-b-2 border-transparent";
-        submitBtn.innerText = "Create Account";
-      }
-    }
-    function handleAuth(e) { e.preventDefault(); alert("Authentication successful!"); closeAuthModal(); }
 
     function filterCategory(btn, category) {
       document.querySelectorAll('.category-btn').forEach(b => { b.className = "category-btn bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition"; });
@@ -402,7 +322,7 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      renderStoriesUI(1000);
+      renderStoriesUI();
     });
 
     audioEl.onended = () => { isPlaying = false; playBtn.innerText = '▶'; statusEl.innerText = 'Finished'; };
