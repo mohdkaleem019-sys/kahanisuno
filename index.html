@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KahaniSuno — Premium Indian Audio Stories</title>
+  <title>KahaniSuno — World-Class Indian Audio Storytelling</title>
+
+  <!-- SEO / Meta Tags -->
+  <meta name="description" content="Listen to premium Indian audio stories in Hindi and regional dialects. Soft ambient flute music, authentic female narrators, and crystal-clear audio quality.">
+  <meta name="theme-color" content="#09090B">
+  <meta property="og:title" content="KahaniSuno — Indian Audio Stories">
+  <meta property="og:description" content="Soothing Hindi audio stories with background flute BGM.">
+  <meta property="og:type" content="website">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -56,7 +63,12 @@
 </head>
 <body class="min-h-screen bg-[#09090B] text-zinc-100 flex flex-col justify-between pb-32 antialiased selection:bg-amber-500 selection:text-black">
 
-  <!-- NAVBAR -->
+  <!-- ACCESSIBILITY SKIP LINK -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-amber-500 text-black font-bold rounded-lg">
+    Skip to main content
+  </a>
+
+  <!-- NAVIGATION BAR -->
   <header class="sticky top-0 z-40 bg-[#09090B]/90 backdrop-blur-md border-b border-white/10 px-4 md:px-8 py-4">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <a href="#" class="flex items-center gap-3 group" aria-label="KahaniSuno Homepage">
@@ -66,9 +78,19 @@
         <span class="text-xl font-bold tracking-tight serif-title text-amber-400">Kahani<span class="text-white">Suno</span></span>
       </a>
 
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-400">
+        <a href="#stories" class="hover:text-amber-500 transition-colors">Kahaniyaan</a>
+        <a href="#categories" class="hover:text-amber-500 transition-colors">Categories</a>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          100% Free HD Streaming
+        </span>
+      </div>
+
       <div class="flex items-center space-x-4">
         <button onclick="KahaniPlayer.playRandomStory()" class="px-5 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-semibold text-sm transition-all transform active:scale-95 shadow-lg shadow-amber-500/20 flex items-center gap-2">
-          <span>🎲</span> Quick Play
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          Quick Play
         </button>
       </div>
     </div>
@@ -88,21 +110,24 @@
           Audio Stories & Audiobooks
         </span>
       </h1>
+      <p class="max-w-2xl mx-auto text-zinc-400 text-sm md:text-base">
+        Immerse yourself in authentic Indian storytelling narrated by soft female voices, accompanied by peaceful flute background melodies.
+      </p>
     </section>
 
     <!-- CATEGORY FILTER TABS -->
     <nav id="categories" aria-label="Story Categories" class="flex items-center gap-2 overflow-x-auto scrollbar-hide py-2">
       <button onclick="KahaniApp.filter('all', this)" class="cat-tab bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="true">
-        All Stories
+        All Stories (100)
       </button>
       <button onclick="KahaniApp.filter('whisper', this)" class="cat-tab bg-zinc-900 text-zinc-300 hover:bg-zinc-800 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
-        🤫 Whisper
+        🤫 Reshmi Whisper
       </button>
       <button onclick="KahaniApp.filter('romance', this)" class="cat-tab bg-zinc-900 text-zinc-300 hover:bg-zinc-800 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
-        ❤️ Romance
+        ❤️ Desi Romance
       </button>
       <button onclick="KahaniApp.filter('mystery', this)" class="cat-tab bg-zinc-900 text-zinc-300 hover:bg-zinc-800 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
-        🌙 Mystery
+        🌙 Nawabi Shaam
       </button>
     </nav>
 
@@ -116,7 +141,7 @@
   </main>
 
   <!-- PERSISTENT AUDIO PLAYER BAR -->
-  <div id="global-player" class="fixed bottom-0 left-0 right-0 z-50 bg-[#0C0C0E]/95 backdrop-blur-xl border-t border-amber-500/20 px-4 md:px-8 py-3 shadow-2xl">
+  <div id="global-player" class="fixed bottom-0 left-0 right-0 z-50 bg-[#0C0C0E]/95 backdrop-blur-xl border-t border-amber-500/20 px-4 md:px-8 py-3 shadow-2xl" role="region" aria-label="Audio Player Controls">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       
       <!-- Metadata -->
@@ -126,16 +151,18 @@
         </div>
         <div class="min-w-0">
           <h4 id="player-title" class="text-xs md:text-sm font-bold text-white truncate serif-title">Select a Story</h4>
-          <p id="player-artist" class="text-[11px] text-amber-400/80 truncate">KahaniSuno Audio Engine</p>
+          <p id="player-artist" class="text-[11px] text-amber-400/80 truncate">KahaniSuno HD Voice Engine</p>
         </div>
       </div>
 
       <!-- Playback Controls -->
       <div class="flex flex-col items-center w-1/3 gap-1">
-        <button onclick="KahaniPlayer.togglePlay()" id="play-btn" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-400 text-black flex items-center justify-center font-bold transition-transform active:scale-95 shadow-lg shadow-amber-500/20">
-          ▶
-        </button>
-        <span id="player-status" class="text-[10px] font-medium text-zinc-400">Ready</span>
+        <div class="flex items-center gap-4">
+          <button onclick="KahaniPlayer.togglePlay()" id="play-btn" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-400 text-black flex items-center justify-center font-bold transition-transform active:scale-95 shadow-lg shadow-amber-500/20" aria-label="Play or Pause Story">
+            ▶
+          </button>
+        </div>
+        <span id="player-status" aria-live="polite" class="text-[10px] font-medium text-zinc-400">Ready</span>
       </div>
 
       <!-- Extended BGM Meta -->
@@ -147,7 +174,7 @@
           <span class="w-[2px] bg-amber-400 eq-bar"></span>
         </div>
         <span class="hidden sm:inline-block px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 text-[10px] font-semibold">
-          ✨ Flute BGM
+          ✨ Flute BGM Active
         </span>
       </div>
 
@@ -237,7 +264,7 @@
         this.currentStory = story;
         document.getElementById('player-title').innerText = story.title;
         document.getElementById('player-artist').innerText = `${story.voiceName} • Soft Accent`;
-        document.getElementById('player-status').innerText = '⚡ Connecting Stream...';
+        document.getElementById('player-status').innerText = '⚡ Fetching HD Voice Stream...';
         document.getElementById('play-btn').innerText = '⏳';
 
         this.bgm.volume = 0.08;
@@ -258,10 +285,10 @@
           await this.audio.play();
           this.bgm.play();
 
-          this.updatePlaybackState(true, '🟢 Playing Stream');
+          this.updatePlaybackState(true, '🟢 Playing HD Studio Stream');
 
         } catch (err) {
-          console.warn('[Audio Engine] Proxy unavailable. Using fallback synthesis.', err);
+          console.warn('[Audio Engine] Backend proxy unavailable. Executing client synthesis fallback.', err);
           this.playBrowserFallback(story.script);
         }
       },
@@ -276,7 +303,7 @@
 
         utterance.onstart = () => {
           this.bgm.play();
-          this.updatePlaybackState(true, '🔊 Playing Voice');
+          this.updatePlaybackState(true, '🔊 Playing (Browser Voice Mode)');
         };
 
         utterance.onend = () => {
