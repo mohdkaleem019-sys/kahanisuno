@@ -160,13 +160,6 @@
 
   <!-- APPLICATION ENGINE SCRIPT -->
   <script>
-    // Audio stream tracks for narration voice
-    const SAMPLE_AUDIO_STREAMS = [
-      "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
-      "https://cdn.pixabay.com/download/audio/2022/10/14/audio_9939f792cb.mp3",
-      "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3"
-    ];
-
     // Curated 100% Female Portrait Photo IDs
     const FEMALE_MODEL_PHOTO_IDS = [
       "1534528741775-53994a69daeb",
@@ -181,12 +174,12 @@
       "1519085360753-af0119f7cbe7"
     ];
 
-    // Detailed narration stories
+    // Detailed multi-sentence story scripts
     const EXTENDED_STORIES_SCRIPTS = [
-      "Suno na... Aaj raat ki hawa mein ek alag hi nasha hai. Bahar halki baarish ho rahi hai aur ghar mein sirf hum dono hain. Khidki se aati hui thandi hawa aur chai ki garam pyali, yeh pal hamesha ke liye roke rakhne ka dil karta hai. Tumhari aawaz jab bhi mere kaanon mein padti hai, dil ko ek ajeeb sa sukoon milta hai.",
+      "Suno na. Aaj raat ki hawa mein ek alag hi nasha hai. Bahar halki baarish ho rahi hai aur ghar mein sirf hum dono hain. Khidki se aati hui thandi hawa aur chai ki garam pyali, yeh pal hamesha ke liye roke rakhne ka dil karta hai. Tumhari aawaz jab bhi mere kaanon mein padti hai, dil ko ek ajeeb sa sukoon milta hai.",
       "Yeh dastaan hai ek aisi shaam ki jab waqt jaise thehar gaya tha. Chand ki madham roshni mein tumhara chehra aur bhi haseen lag raha tha. Humne ghanton baatein ki, par lagta hai jaise abhi toh shuruaat hui hai. Har ek lafz jo tumne kaha, mere dil mein ghar kar gaya.",
-      "Raat ke is pehar jab poora shehar so raha hai, humari kahani ek naya mod le rahi hai. Khamoshi mein bhi ek alag hi guftagu ho rahi hai. Tumhari aanhkon mein chhupa wo raaz aaj finally saamne aa hi gaya.",
-      "Nawabi shaam ki wo khoobsurat mulaqat mujhe aaj bhi yaad hai. Haveli ki baramde mein baith kar purani yaadon ko taza karna, aur aahista aahista ek doosre ke kareeb aana. Ye safar kitna khoobsurat hai na."
+      "Raat ke is pehar jab poora shehar so raha hai, humari kahani ek naya mod le rahi hai. Khamoshi mein bhi ek alag hi guftagu ho rahi hai. Tumhari aankhon mein chhupa wo raaz aaj finally saamne aa hi gaya.",
+      "Nawabi shaam ki wo khoobsurat mulaqat mujhe aaj bhi yaad hai. Haveli ke baramde mein baith kar purani yaadon ko taza karna, aur aahista aahista ek doosre ke kareeb aana. Ye safar kitna khoobsurat hai na."
     ];
 
     // Dynamic story generator (100 episodes)
@@ -201,7 +194,6 @@
         category: categories[i % categories.length],
         voiceName: voices[i % voices.length],
         image: `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=400&h=500&q=80&sig=${i + 1}`,
-        audioUrl: SAMPLE_AUDIO_STREAMS[i % SAMPLE_AUDIO_STREAMS.length],
         script: EXTENDED_STORIES_SCRIPTS[i % EXTENDED_STORIES_SCRIPTS.length],
         duration: `${Math.floor(Math.random() * 15) + 10}:00`
       };
@@ -255,71 +247,80 @@
     };
 
     const KahaniPlayer = {
-      audio: new Audio(),
       bgm: new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8230553.mp3?filename=indian-meditation-flute-10174.mp3"),
       isPlaying: false,
       currentStory: null,
+      sentencesQueue: [],
+      currentSentenceIndex: 0,
+
+      stopSpeech() {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+        }
+      },
 
       async playStory(id) {
         const story = STORIES_DATA.find(s => s.id === id);
         if (!story) return;
 
-        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        this.stopSpeech();
 
         this.currentStory = story;
         document.getElementById('player-title').innerText = story.title;
         document.getElementById('player-artist').innerText = `${story.voiceName} • Full Narration`;
-        document.getElementById('player-status').innerText = '⚡ Loading...';
-        document.getElementById('play-btn').innerText = '⏳';
+        document.getElementById('player-status').innerText = '🎙️ Speaking...';
+        document.getElementById('play-btn').innerText = '⏸';
 
-        this.audio.src = story.audioUrl;
-        
-        // Narration Voice at maximum 100% clarity
-        this.audio.volume = 1.0;
-        
-        // Background Flute dropped to 0.001 (0.1%) for a ultra-minimal subtle background feel
-        this.bgm.volume = 0.001;
+        // Background flute set to whisper level (0.0003)
+        this.bgm.volume = 0.0003;
         this.bgm.loop = true;
-
+        
         try {
-          await Promise.all([this.audio.play(), this.bgm.play()]);
-          this.updatePlaybackState(true, '🟢 Playing Full Story');
-        } catch (err) {
-          console.warn('[Audio Engine] Audio stream interrupted, activating voice narrator fallback.', err);
-          this.playBrowserFallback(story.script);
+          await this.bgm.play();
+        } catch(e) {
+          console.log('BGM Autoplay handling');
         }
 
-        this.audio.onended = () => {
+        // Split narrative into distinct sentence units to prevent browser speech cutoff
+        this.sentencesQueue = story.script.match(/[^.!?]+[.!?]+/g) || [story.script];
+        this.currentSentenceIndex = 0;
+
+        this.isPlaying = true;
+        this.speakNextSentence();
+        this.updatePlaybackState(true, '🎙️ Narrating Story...');
+      },
+
+      speakNextSentence() {
+        if (!this.isPlaying) return;
+
+        if (this.currentSentenceIndex >= this.sentencesQueue.length) {
           this.bgm.pause();
           this.bgm.currentTime = 0;
           this.updatePlaybackState(false, 'Story Completed');
-        };
-      },
+          return;
+        }
 
-      playBrowserFallback(text) {
-        if (!('speechSynthesis' in window)) return;
-        window.speechSynthesis.cancel();
-
+        const text = this.sentencesQueue[this.currentSentenceIndex];
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'hi-IN';
-        utterance.rate = 0.82;
+        utterance.rate = 0.85; // Natural smooth narration pace
+        utterance.pitch = 1.0;
 
-        utterance.onstart = () => {
-          // Ultra-low volume (0.001) during browser speech playback
-          this.bgm.volume = 0.001;
-          this.bgm.play();
-          this.updatePlaybackState(true, '🎙️ Playing Voice Narration');
-        };
+        // Try selecting a female voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const femaleVoice = voices.find(v => v.lang.includes('hi') || v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('google hindi'));
+        if (femaleVoice) {
+          utterance.voice = femaleVoice;
+        }
 
         utterance.onend = () => {
-          this.bgm.pause();
-          this.bgm.currentTime = 0;
-          this.updatePlaybackState(false, 'Finished');
+          this.currentSentenceIndex++;
+          this.speakNextSentence();
         };
 
         utterance.onerror = () => {
-          this.bgm.pause();
-          this.updatePlaybackState(false, 'Error');
+          this.currentSentenceIndex++;
+          this.speakNextSentence();
         };
 
         window.speechSynthesis.speak(utterance);
@@ -332,16 +333,13 @@
         }
 
         if (this.isPlaying) {
-          this.audio.pause();
+          this.stopSpeech();
           this.bgm.pause();
-          if ('speechSynthesis' in window) window.speechSynthesis.pause();
           this.updatePlaybackState(false, 'Paused');
         } else {
-          this.audio.play();
           this.bgm.play();
-          if ('speechSynthesis' in window && window.speechSynthesis.paused) {
-            window.speechSynthesis.resume();
-          }
+          this.isPlaying = true;
+          this.speakNextSentence();
           this.updatePlaybackState(true, 'Playing');
         }
       },
@@ -363,6 +361,13 @@
         this.playStory(randomId);
       }
     };
+
+    // Pre-load voices for speech synthesis
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
 
     window.addEventListener('DOMContentLoaded', () => KahaniApp.init());
   </script>
