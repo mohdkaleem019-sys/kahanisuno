@@ -156,25 +156,37 @@
 
   <!-- COMPLETE ENGINE SCRIPT -->
   <script>
-    const BACKEND_API_ENDPOINT = "http://localhost:5000/api/v1/tts/stream";
+    // Audio stream samples
+    const SAMPLE_AUDIO_STREAMS = [
+      "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
+      "https://cdn.pixabay.com/download/audio/2022/10/14/audio_9939f792cb.mp3",
+      "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3"
+    ];
 
-    // GENERATE 100 UNIQUE ALBUM COVERS dynamically using unique seeds
+    // High Quality Foreigner Model Portrait IDs for stunning visual variety
+    const MODEL_PHOTO_IDS = [
+      "1534528741775-53994a69daeb", "1517841905240-472988babdf9", "1524504388940-b1c1722653e1",
+      "1494790108377-be9c29b29330", "1507003211169-0a1dd7228f2d", "1539571696357-5a69c17a67c6",
+      "1529626455594-4ff0802cfb7e", "1488426862026-3ee34a7d66df", "1544005313-94ddf0286df2",
+      "1508214751196-bcfd4ca60f91", "1531746020798-e6953c6e8e04", "1519085360753-af0119f7cbe7"
+    ];
+
+    // GENERATE 100 STORIES WITH UNIQUE STUNNING FOREIGN MODEL PORTRAITS
     const STORIES_DATA = Array.from({ length: 100 }, (_, i) => {
       const categories = ['whisper', 'romance', 'mystery'];
       const voices = ['Riya', 'Priya', 'Ananya', 'Meera', 'Kavya'];
-      const keywords = ['portrait', 'night', 'romance', 'dark', 'cozy', 'story', 'moody'];
-      const keyword = keywords[i % keywords.length];
+      const photoId = MODEL_PHOTO_IDS[i % MODEL_PHOTO_IDS.length];
       
       return {
         id: i + 1,
         title: `Kahani #${i + 1} — ${['Reshmi Baatein', 'Nawabi Shaam', 'Chupke Se', 'Raat Ki Aawaz', 'Ankahi Dastaan'][i % 5]}`,
         category: categories[i % categories.length],
         voiceName: voices[i % voices.length],
-        voiceId: ['21m00Tcm4TlvDq8ikWAM', 'EXAVITQu4vr4xnSDxMaL', 'MF3mGyEYCl7XYWbV9V6O'][i % 3],
-        // Each image gets a unique seed index so all 100 cards have distinct images!
-        image: `https://picsum.photos/seed/kahani${i + 101}/400/500`,
+        // High quality portrait image URL with custom tint seed
+        image: `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=400&h=500&q=80&sig=${i + 1}`,
+        audioUrl: SAMPLE_AUDIO_STREAMS[i % SAMPLE_AUDIO_STREAMS.length],
         script: "Suno na... Aaj raat ki hawa mein ek alag hi nasha hai. Bahar halki baarish ho rahi hai aur ghar mein sirf hum dono hain...",
-        duration: `${Math.floor(Math.random() * 10) + 5}:30`
+        duration: `${Math.floor(Math.random() * 15) + 10}:00`
       };
     });
 
@@ -218,7 +230,7 @@
             </div>
             <div class="mt-3 pt-2 border-t border-white/5 flex justify-between items-center text-[10px] text-zinc-400">
               <span>⏱ ${s.duration} mins</span>
-              <span class="text-amber-400 font-medium">🪈 Flute BGM</span>
+              <span class="text-amber-400 font-medium">🪈 Full Story</span>
             </div>
           </article>
         `).join('');
@@ -235,36 +247,30 @@
         const story = STORIES_DATA.find(s => s.id === id);
         if (!story) return;
 
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
         this.currentStory = story;
         document.getElementById('player-title').innerText = story.title;
-        document.getElementById('player-artist').innerText = `${story.voiceName} • Soft Accent`;
-        document.getElementById('player-status').innerText = '⚡ Connecting Stream...';
+        document.getElementById('player-artist').innerText = `${story.voiceName} • Full Episode`;
+        document.getElementById('player-status').innerText = '⚡ Loading Audio...';
         document.getElementById('play-btn').innerText = '⏳';
 
+        this.audio.src = story.audioUrl;
         this.bgm.volume = 0.08;
         this.bgm.loop = true;
 
         try {
-          const response = await fetch(BACKEND_API_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: story.script, voiceId: story.voiceId })
-          });
-
-          if (!response.ok) throw new Error('Proxy unreachable');
-
-          const blob = await response.blob();
-          this.audio.src = URL.createObjectURL(blob);
-          
-          await this.audio.play();
-          this.bgm.play();
-
-          this.updatePlaybackState(true, '🟢 Playing Stream');
-
+          await Promise.all([this.audio.play(), this.bgm.play()]);
+          this.updatePlaybackState(true, '🟢 Playing Full Episode');
         } catch (err) {
-          console.warn('[Audio Engine] Proxy unavailable. Using fallback synthesis.', err);
+          console.warn('[Audio Engine] Buffering issue, using voice fallback.', err);
           this.playBrowserFallback(story.script);
         }
+
+        this.audio.onended = () => {
+          this.bgm.pause();
+          this.updatePlaybackState(false, 'Completed');
+        };
       },
 
       playBrowserFallback(text) {
@@ -277,7 +283,7 @@
 
         utterance.onstart = () => {
           this.bgm.play();
-          this.updatePlaybackState(true, '🔊 Playing Voice');
+          this.updatePlaybackState(true, '🔊 Playing Voice Preview');
         };
 
         utterance.onend = () => {
