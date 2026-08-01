@@ -167,7 +167,7 @@
       "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3"
     ];
 
-    // Curated Female Portrait Photo IDs
+    // Curated 100% Female Portrait Photo IDs
     const FEMALE_MODEL_PHOTO_IDS = [
       "1534528741775-53994a69daeb",
       "1517841905240-472988babdf9",
@@ -176,7 +176,7 @@
       "1529626455594-4ff0802cfb7e",
       "1488426862026-3ee34a7d66df",
       "1544005313-94ddf0286df2",
-      "1508214751196-bcfd4ca60f91",
+      "1503104897754-594366cbf614",
       "1531746020798-e6953c6e8e04",
       "1519085360753-af0119f7cbe7"
     ];
@@ -274,11 +274,11 @@
 
         this.audio.src = story.audioUrl;
         
-        // Voice Audio at maximum volume (100%)
+        // Narration Voice at maximum 100% clarity
         this.audio.volume = 1.0;
         
-        // Background Flute reduced to ultra-soft level (0.5%)
-        this.bgm.volume = 0.005;
+        // Background Flute dropped to 0.001 (0.1%) for a ultra-minimal subtle background feel
+        this.bgm.volume = 0.001;
         this.bgm.loop = true;
 
         try {
@@ -305,7 +305,8 @@
         utterance.rate = 0.82;
 
         utterance.onstart = () => {
-          this.bgm.volume = 0.005;
+          // Ultra-low volume (0.001) during browser speech playback
+          this.bgm.volume = 0.001;
           this.bgm.play();
           this.updatePlaybackState(true, '🎙️ Playing Voice Narration');
         };
