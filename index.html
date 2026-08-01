@@ -3,14 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KahaniSuno — World-Class Indian Audio Storytelling</title>
-
-  <!-- SEO / Meta Tags -->
-  <meta name="description" content="Listen to premium Indian audio stories in Hindi and regional dialects. Soft ambient flute music, authentic female narrators, and crystal-clear audio quality.">
-  <meta name="theme-color" content="#09090B">
-  <meta property="og:title" content="KahaniSuno — Indian Audio Stories">
-  <meta property="og:description" content="Soothing Hindi audio stories with background flute BGM.">
-  <meta property="og:type" content="website">
+  <title>KahaniSuno — Premium Indian Audio Stories</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -63,12 +56,7 @@
 </head>
 <body class="min-h-screen bg-[#09090B] text-zinc-100 flex flex-col justify-between pb-32 antialiased selection:bg-amber-500 selection:text-black">
 
-  <!-- ACCESSIBILITY SKIP LINK -->
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-amber-500 text-black font-bold rounded-lg">
-    Skip to main content
-  </a>
-
-  <!-- NAVIGATION BAR -->
+  <!-- NAVBAR -->
   <header class="sticky top-0 z-40 bg-[#09090B]/90 backdrop-blur-md border-b border-white/10 px-4 md:px-8 py-4">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <a href="#" class="flex items-center gap-3 group" aria-label="KahaniSuno Homepage">
@@ -78,19 +66,9 @@
         <span class="text-xl font-bold tracking-tight serif-title text-amber-400">Kahani<span class="text-white">Suno</span></span>
       </a>
 
-      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-400">
-        <a href="#stories" class="hover:text-amber-500 transition-colors">Kahaniyaan</a>
-        <a href="#categories" class="hover:text-amber-500 transition-colors">Categories</a>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          100% Free HD Streaming
-        </span>
-      </div>
-
       <div class="flex items-center space-x-4">
         <button onclick="KahaniPlayer.playRandomStory()" class="px-5 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-semibold text-sm transition-all transform active:scale-95 shadow-lg shadow-amber-500/20 flex items-center gap-2">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          Quick Play
+          <span>🎲</span> Quick Play
         </button>
       </div>
     </div>
@@ -110,9 +88,6 @@
           Audio Stories & Audiobooks
         </span>
       </h1>
-      <p class="max-w-2xl mx-auto text-zinc-400 text-sm md:text-base">
-        Immerse yourself in authentic Indian storytelling narrated by soft female voices, accompanied by peaceful flute background melodies.
-      </p>
     </section>
 
     <!-- CATEGORY FILTER TABS -->
@@ -141,7 +116,7 @@
   </main>
 
   <!-- PERSISTENT AUDIO PLAYER BAR -->
-  <div id="global-player" class="fixed bottom-0 left-0 right-0 z-50 bg-[#0C0C0E]/95 backdrop-blur-xl border-t border-amber-500/20 px-4 md:px-8 py-3 shadow-2xl" role="region" aria-label="Audio Player Controls">
+  <div id="global-player" class="fixed bottom-0 left-0 right-0 z-50 bg-[#0C0C0E]/95 backdrop-blur-xl border-t border-amber-500/20 px-4 md:px-8 py-3 shadow-2xl">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       
       <!-- Metadata -->
@@ -151,18 +126,16 @@
         </div>
         <div class="min-w-0">
           <h4 id="player-title" class="text-xs md:text-sm font-bold text-white truncate serif-title">Select a Story</h4>
-          <p id="player-artist" class="text-[11px] text-amber-400/80 truncate">KahaniSuno HD Voice Engine</p>
+          <p id="player-artist" class="text-[11px] text-amber-400/80 truncate">KahaniSuno Audio Engine</p>
         </div>
       </div>
 
       <!-- Playback Controls -->
       <div class="flex flex-col items-center w-1/3 gap-1">
-        <div class="flex items-center gap-4">
-          <button onclick="KahaniPlayer.togglePlay()" id="play-btn" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-400 text-black flex items-center justify-center font-bold transition-transform active:scale-95 shadow-lg shadow-amber-500/20" aria-label="Play or Pause Story">
-            ▶
-          </button>
-        </div>
-        <span id="player-status" aria-live="polite" class="text-[10px] font-medium text-zinc-400">Ready</span>
+        <button onclick="KahaniPlayer.togglePlay()" id="play-btn" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-400 text-black flex items-center justify-center font-bold transition-transform active:scale-95 shadow-lg shadow-amber-500/20">
+          ▶
+        </button>
+        <span id="player-status" class="text-[10px] font-medium text-zinc-400">Ready</span>
       </div>
 
       <!-- Extended BGM Meta -->
@@ -185,24 +158,25 @@
   <script>
     const BACKEND_API_ENDPOINT = "http://localhost:5000/api/v1/tts/stream";
 
-    const VERIFIED_FEMALE_PHOTOS = [
-      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=400&h=500&q=80",
-      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=400&h=500&q=80",
-      "https://images.unsplash.com/photo-1618151313441-bc79b11e5090?auto=format&fit=crop&w=400&h=500&q=80",
-      "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=400&h=500&q=80",
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&h=500&q=80"
-    ];
-
-    const STORIES_DATA = Array.from({ length: 100 }, (_, i) => ({
-      id: i + 1,
-      title: `Kahani #${i + 1} — Nawabi Shaam`,
-      category: ['whisper', 'romance', 'mystery'][i % 3],
-      voiceName: ['Riya', 'Priya', 'Ananya'][i % 3],
-      voiceId: ['21m00Tcm4TlvDq8ikWAM', 'EXAVITQu4vr4xnSDxMaL', 'MF3mGyEYCl7XYWbV9V6O'][i % 3],
-      image: VERIFIED_FEMALE_PHOTOS[i % VERIFIED_FEMALE_PHOTOS.length],
-      script: "Suno na... Aaj raat ki hawa mein ek alag hi nasha hai. Bahar halki baarish ho rahi hai aur ghar mein sirf hum dono hain...",
-      duration: "10:15"
-    }));
+    // GENERATE 100 UNIQUE ALBUM COVERS dynamically using unique seeds
+    const STORIES_DATA = Array.from({ length: 100 }, (_, i) => {
+      const categories = ['whisper', 'romance', 'mystery'];
+      const voices = ['Riya', 'Priya', 'Ananya', 'Meera', 'Kavya'];
+      const keywords = ['portrait', 'night', 'romance', 'dark', 'cozy', 'story', 'moody'];
+      const keyword = keywords[i % keywords.length];
+      
+      return {
+        id: i + 1,
+        title: `Kahani #${i + 1} — ${['Reshmi Baatein', 'Nawabi Shaam', 'Chupke Se', 'Raat Ki Aawaz', 'Ankahi Dastaan'][i % 5]}`,
+        category: categories[i % categories.length],
+        voiceName: voices[i % voices.length],
+        voiceId: ['21m00Tcm4TlvDq8ikWAM', 'EXAVITQu4vr4xnSDxMaL', 'MF3mGyEYCl7XYWbV9V6O'][i % 3],
+        // Each image gets a unique seed index so all 100 cards have distinct images!
+        image: `https://picsum.photos/seed/kahani${i + 101}/400/500`,
+        script: "Suno na... Aaj raat ki hawa mein ek alag hi nasha hai. Bahar halki baarish ho rahi hai aur ghar mein sirf hum dono hain...",
+        duration: `${Math.floor(Math.random() * 10) + 5}:30`
+      };
+    });
 
     const KahaniApp = {
       currentFilter: 'all',
@@ -240,11 +214,11 @@
                 </button>
               </div>
               <h3 class="font-bold text-sm text-zinc-100 truncate serif-title group-hover:text-amber-400">${s.title}</h3>
-              <p class="text-[11px] text-amber-300/80 font-medium mt-0.5">👩 ${s.voiceName}</p>
+              <p class="text-[11px] text-amber-300/80 font-medium mt-0.5">👩 Narrator: ${s.voiceName}</p>
             </div>
             <div class="mt-3 pt-2 border-t border-white/5 flex justify-between items-center text-[10px] text-zinc-400">
-              <span>${s.duration} mins</span>
-              <span class="text-amber-400 font-medium">🪈 Soft Flute</span>
+              <span>⏱ ${s.duration} mins</span>
+              <span class="text-amber-400 font-medium">🪈 Flute BGM</span>
             </div>
           </article>
         `).join('');
@@ -264,7 +238,7 @@
         this.currentStory = story;
         document.getElementById('player-title').innerText = story.title;
         document.getElementById('player-artist').innerText = `${story.voiceName} • Soft Accent`;
-        document.getElementById('player-status').innerText = '⚡ Fetching HD Voice Stream...';
+        document.getElementById('player-status').innerText = '⚡ Connecting Stream...';
         document.getElementById('play-btn').innerText = '⏳';
 
         this.bgm.volume = 0.08;
@@ -285,10 +259,10 @@
           await this.audio.play();
           this.bgm.play();
 
-          this.updatePlaybackState(true, '🟢 Playing HD Studio Stream');
+          this.updatePlaybackState(true, '🟢 Playing Stream');
 
         } catch (err) {
-          console.warn('[Audio Engine] Backend proxy unavailable. Executing client synthesis fallback.', err);
+          console.warn('[Audio Engine] Proxy unavailable. Using fallback synthesis.', err);
           this.playBrowserFallback(story.script);
         }
       },
@@ -303,7 +277,7 @@
 
         utterance.onstart = () => {
           this.bgm.play();
-          this.updatePlaybackState(true, '🔊 Playing (Browser Voice Mode)');
+          this.updatePlaybackState(true, '🔊 Playing Voice');
         };
 
         utterance.onend = () => {
