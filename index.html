@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="hi" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KahaniSuno — Premium Audio Stories</title>
+  <title>KahaniSuno — Khanti Desi Kahaniyan</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -78,7 +78,7 @@
 
       <div class="flex items-center space-x-4">
         <button onclick="KahaniPlayer.playRandomStory()" class="px-5 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-semibold text-sm transition-all transform active:scale-95 shadow-lg shadow-amber-500/20 flex items-center gap-2">
-          <span>🎲</span> Quick Play
+          <span>🎲</span> Koi Bhi Suno
         </button>
       </div>
     </div>
@@ -90,9 +90,9 @@
     <!-- HERO SECTION -->
     <section class="text-center space-y-4 py-8 border-b border-white/10 relative">
       <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight serif-title leading-tight drop-shadow-md">
-        Aapki Apni Desi Aawaz... <br/>
+        Mitti Ki Sondhi Aawaz... <br/>
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500">
-          Audio Stories & Audiobooks
+          Khanti Desi Hindi Kahaniyan
         </span>
       </h1>
     </section>
@@ -100,16 +100,16 @@
     <!-- CATEGORY FILTER TABS -->
     <nav id="categories" aria-label="Story Categories" class="flex items-center gap-2 overflow-x-auto scrollbar-hide py-2">
       <button onclick="KahaniApp.filter('all', this)" class="cat-tab bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-md shadow-amber-500/10" aria-selected="true">
-        All Stories (100)
+        Sabhi Kahaniyan (100)
       </button>
       <button onclick="KahaniApp.filter('whisper', this)" class="cat-tab bg-[#181822] text-zinc-300 hover:bg-[#20202C] border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
-        🤫 Reshmi Whisper
+        🌾 Kacha Makan
       </button>
       <button onclick="KahaniApp.filter('romance', this)" class="cat-tab bg-[#181822] text-zinc-300 hover:bg-[#20202C] border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
-        ❤️ Desi Romance
+        ❤️ Desi Preet
       </button>
       <button onclick="KahaniApp.filter('mystery', this)" class="cat-tab bg-[#181822] text-zinc-300 hover:bg-[#20202C] border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
-        🌙 Nawabi Shaam
+        🌙 Aangan Ki Saanjh
       </button>
     </nav>
 
@@ -132,8 +132,8 @@
           🪈
         </div>
         <div class="min-w-0">
-          <h4 id="player-title" class="text-xs md:text-sm font-bold text-white truncate serif-title">Select a Story</h4>
-          <p id="player-artist" class="text-[11px] text-amber-400/80 truncate">KahaniSuno Audio Engine</p>
+          <h4 id="player-title" class="text-xs md:text-sm font-bold text-white truncate serif-title">Kahani Chuno</h4>
+          <p id="player-artist" class="text-[11px] text-amber-400/80 truncate">Khanti Hindi Voice Engine</p>
         </div>
       </div>
 
@@ -142,7 +142,7 @@
         <button onclick="KahaniPlayer.togglePlay()" id="play-btn" aria-label="Play or Pause Story" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-400 text-black flex items-center justify-center font-bold transition-transform active:scale-95 shadow-lg shadow-amber-500/20">
           ▶
         </button>
-        <span id="player-status" class="text-[10px] font-medium text-zinc-400">Ready</span>
+        <span id="player-status" class="text-[10px] font-medium text-zinc-400">Taiyar Hai</span>
       </div>
 
       <!-- EQ Indicator -->
@@ -174,23 +174,23 @@
       "1519085360753-af0119f7cbe7"
     ];
 
-    // Detailed multi-sentence story scripts
+    // Raw, Unrefined Pure Rural Hindi Script (No Urdu/English mix)
     const EXTENDED_STORIES_SCRIPTS = [
-      "Suno na. Aaj raat ki hawa mein ek alag hi nasha hai. Bahar halki baarish ho rahi hai aur ghar mein sirf hum dono hain. Khidki se aati hui thandi hawa aur chai ki garam pyali, yeh pal hamesha ke liye roke rakhne ka dil karta hai. Tumhari aawaz jab bhi mere kaanon mein padti hai, dil ko ek ajeeb sa sukoon milta hai.",
-      "Yeh dastaan hai ek aisi shaam ki jab waqt jaise thehar gaya tha. Chand ki madham roshni mein tumhara chehra aur bhi haseen lag raha tha. Humne ghanton baatein ki, par lagta hai jaise abhi toh shuruaat hui hai. Har ek lafz jo tumne kaha, mere dil mein ghar kar gaya.",
-      "Raat ke is pehar jab poora shehar so raha hai, humari kahani ek naya mod le rahi hai. Khamoshi mein bhi ek alag hi guftagu ho rahi hai. Tumhari aankhon mein chhupa wo raaz aaj finally saamne aa hi gaya.",
-      "Nawabi shaam ki wo khoobsurat mulaqat mujhe aaj bhi yaad hai. Haveli ke baramde mein baith kar purani yaadon ko taza karna, aur aahista aahista ek doosre ke kareeb aana. Ye safar kitna khoobsurat hai na."
+      "Suno re... Aaj ki raat badi udas lagat hai. Bahar kachhi sadak pe thandi hawa chalat hai aur aangan me hum akele baithal bani. Chulah ki aag abhi thandi bhail ba, aur dhibri ki roshni me tohar raah takat bani. Tumhar aawaz jab bhi kaan me padat hai, dil ko ek ajeeb sa sukoon mile hai.",
+      "Dekho re... Ye kahani hai us sanjh ki jab poora gaon so gaya tha. Peepal ke neeche baith ke hum tohar raah takat rahe. Chand ki roshni me tohar chehra aur sundar lagat raha. Humne ghanton baat kiya, par laga jaise abhi shuru bhail ba.",
+      "Sanjh dhal gayi ba... Ab khet pe sannaata cha gaya ba. Kachhe makan ke aangan me baith ke purani baatein yaad aavat hain. Tohar aankhon me jo raaz chupa raha, aaj wo sab pata chal gaya ba.",
+      "Aangan ki mitti ki khushbu aur mithi chai ki pyali... Ye sab yaad aavat hai humko. Kothari me baith ke purani yaadon ko dohrana aur tohar muskuraahat. Ye sab kitna pyara lagat hai na."
     ];
 
     // Dynamic story generator (100 episodes)
     const STORIES_DATA = Array.from({ length: 100 }, (_, i) => {
       const categories = ['whisper', 'romance', 'mystery'];
-      const voices = ['Riya', 'Priya', 'Ananya', 'Meera', 'Kavya'];
+      const voices = ['Phoolmati', 'Champa', 'Lachi', 'Ganga', 'Rambha'];
       const photoId = FEMALE_MODEL_PHOTO_IDS[i % FEMALE_MODEL_PHOTO_IDS.length];
       
       return {
         id: i + 1,
-        title: `Kahani #${i + 1} — ${['Reshmi Baatein', 'Nawabi Shaam', 'Chupke Se', 'Raat Ki Aawaz', 'Ankahi Dastaan'][i % 5]}`,
+        title: `Kahani #${i + 1} — ${['Khanti Desi Baat', 'Aangan Ki Saanjh', 'Kachhi Sadak', 'Dhibri Ki Roshni', 'Mitti Ki Khushbu'][i % 5]}`,
         category: categories[i % categories.length],
         voiceName: voices[i % voices.length],
         image: `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=400&h=500&q=80&sig=${i + 1}`,
@@ -235,11 +235,11 @@
                 </button>
               </div>
               <h3 class="font-bold text-sm text-zinc-100 truncate serif-title group-hover:text-amber-400">${s.title}</h3>
-              <p class="text-[11px] text-amber-300/80 font-medium mt-0.5">👩 Narrator: ${s.voiceName}</p>
+              <p class="text-[11px] text-amber-300/80 font-medium mt-0.5">🌾 Gaon Ki Aawaz: ${s.voiceName}</p>
             </div>
             <div class="mt-3 pt-2 border-t border-white/10 flex justify-between items-center text-[10px] text-zinc-400">
               <span>⏱ ${s.duration} mins</span>
-              <span class="text-amber-400 font-medium">🪈 Full Story</span>
+              <span class="text-amber-400 font-medium">🪈 Pura Suno</span>
             </div>
           </article>
         `).join('');
@@ -267,27 +267,26 @@
 
         this.currentStory = story;
         document.getElementById('player-title').innerText = story.title;
-        document.getElementById('player-artist').innerText = `${story.voiceName} • Full Narration`;
-        document.getElementById('player-status').innerText = '🎙️ Speaking...';
+        document.getElementById('player-artist').innerText = `${story.voiceName} • Desi Aawaz`;
+        document.getElementById('player-status').innerText = '🌾 Sunaat Bani...';
         document.getElementById('play-btn').innerText = '⏸';
 
-        // Background flute set to whisper level (0.0003)
-        this.bgm.volume = 0.0003;
+        // Barely audible flute back layer (0.0001)
+        this.bgm.volume = 0.0001;
         this.bgm.loop = true;
         
         try {
           await this.bgm.play();
         } catch(e) {
-          console.log('BGM Autoplay handling');
+          console.log('BGM Playback active');
         }
 
-        // Split narrative into distinct sentence units to prevent browser speech cutoff
         this.sentencesQueue = story.script.match(/[^.!?]+[.!?]+/g) || [story.script];
         this.currentSentenceIndex = 0;
 
         this.isPlaying = true;
         this.speakNextSentence();
-        this.updatePlaybackState(true, '🎙️ Narrating Story...');
+        this.updatePlaybackState(true, '🌾 Kahani Chal Rahi Ba...');
       },
 
       speakNextSentence() {
@@ -296,19 +295,25 @@
         if (this.currentSentenceIndex >= this.sentencesQueue.length) {
           this.bgm.pause();
           this.bgm.currentTime = 0;
-          this.updatePlaybackState(false, 'Story Completed');
+          this.updatePlaybackState(false, 'Kahani Poori Bhail');
           return;
         }
 
         const text = this.sentencesQueue[this.currentSentenceIndex];
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'hi-IN';
-        utterance.rate = 0.85; // Natural smooth narration pace
-        utterance.pitch = 1.0;
+        
+        // Settings for raw, unrefined young village voice
+        utterance.rate = 0.78; // Slower, authentic village cadence
+        utterance.pitch = 1.30; // Slightly higher pitch for raw girl voice
 
-        // Try selecting a female voice if available
         const voices = window.speechSynthesis.getVoices();
-        const femaleVoice = voices.find(v => v.lang.includes('hi') || v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('google hindi'));
+        const femaleVoice = voices.find(v => 
+          v.lang.includes('hi') || 
+          v.name.toLowerCase().includes('female') || 
+          v.name.toLowerCase().includes('swara')
+        );
+        
         if (femaleVoice) {
           utterance.voice = femaleVoice;
         }
@@ -335,12 +340,12 @@
         if (this.isPlaying) {
           this.stopSpeech();
           this.bgm.pause();
-          this.updatePlaybackState(false, 'Paused');
+          this.updatePlaybackState(false, 'Ruk Gail');
         } else {
           this.bgm.play();
           this.isPlaying = true;
           this.speakNextSentence();
-          this.updatePlaybackState(true, 'Playing');
+          this.updatePlaybackState(true, 'Chal Rahi Ba');
         }
       },
 
@@ -362,7 +367,6 @@
       }
     };
 
-    // Pre-load voices for speech synthesis
     if ('speechSynthesis' in window) {
       window.speechSynthesis.onvoiceschanged = () => {
         window.speechSynthesis.getVoices();
