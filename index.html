@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KahaniSuno — Premium Indian Audio Stories</title>
+  <title>KahaniSuno — Premium Audio Stories</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -15,20 +15,29 @@
 
   <style>
     :root {
-      --bg-base: #09090B;
-      --bg-surface: #121215;
-      --bg-card: #16161A;
+      --bg-base: #0C0C10;
+      --bg-surface: #14141A;
+      --bg-card: #181822;
       --brand-primary: #F59E0B;
       --brand-hover: #D97706;
     }
+    
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg-base);
+      /* Rich Midnight Radial Ambient Mesh */
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 10% 45%, rgba(180, 83, 9, 0.08) 0%, transparent 35%),
+        radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.06) 0%, transparent 40%);
+      background-attachment: fixed;
       color: #FAFAFA;
     }
+
     .serif-title { 
       font-family: 'Playfair Display', serif; 
     }
+
     .scrollbar-hide::-webkit-scrollbar {
       display: none;
     }
@@ -36,10 +45,12 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+
     :focus-visible {
       outline: 2px solid var(--brand-primary);
       outline-offset: 2px;
     }
+
     .eq-bar {
       animation: eq 1.2s ease-in-out infinite alternate;
     }
@@ -54,13 +65,13 @@
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#09090B] text-zinc-100 flex flex-col justify-between pb-32 antialiased selection:bg-amber-500 selection:text-black">
+<body class="min-h-screen text-zinc-100 flex flex-col justify-between pb-32 antialiased selection:bg-amber-500 selection:text-black">
 
-  <!-- NAVBAR -->
-  <header class="sticky top-0 z-40 bg-[#09090B]/90 backdrop-blur-md border-b border-white/10 px-4 md:px-8 py-4">
+  <!-- HEADER / NAVBAR -->
+  <header class="sticky top-0 z-40 bg-[#0C0C10]/85 backdrop-blur-xl border-b border-white/10 px-4 md:px-8 py-4">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <a href="#" class="flex items-center gap-3 group" aria-label="KahaniSuno Homepage">
-        <div class="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 text-xl font-bold group-hover:scale-105 transition-transform">
+        <div class="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 text-xl font-bold group-hover:scale-105 transition-transform shadow-lg shadow-amber-500/10">
           🪈
         </div>
         <span class="text-xl font-bold tracking-tight serif-title text-amber-400">Kahani<span class="text-white">Suno</span></span>
@@ -78,11 +89,11 @@
   <main id="main-content" class="max-w-7xl mx-auto px-4 md:px-8 py-8 w-full space-y-8">
 
     <!-- HERO SECTION -->
-    <section class="text-center space-y-4 py-8 border-b border-white/5">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold tracking-wider uppercase">
-        <span>✨ Handpicked Desi Voices & Ambient Flute Music</span>
+    <section class="text-center space-y-4 py-10 border-b border-white/10 relative">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold tracking-wider uppercase shadow-inner">
+        <span>✨ Crisp Voice & Soft Ambient Flute BGM</span>
       </div>
-      <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight serif-title leading-tight">
+      <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight serif-title leading-tight drop-shadow-md">
         Aapki Apni Desi Aawaz... <br/>
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500">
           Audio Stories & Audiobooks
@@ -92,16 +103,16 @@
 
     <!-- CATEGORY FILTER TABS -->
     <nav id="categories" aria-label="Story Categories" class="flex items-center gap-2 overflow-x-auto scrollbar-hide py-2">
-      <button onclick="KahaniApp.filter('all', this)" class="cat-tab bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="true">
+      <button onclick="KahaniApp.filter('all', this)" class="cat-tab bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-md shadow-amber-500/10" aria-selected="true">
         All Stories (100)
       </button>
-      <button onclick="KahaniApp.filter('whisper', this)" class="cat-tab bg-zinc-900 text-zinc-300 hover:bg-zinc-800 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
+      <button onclick="KahaniApp.filter('whisper', this)" class="cat-tab bg-[#181822] text-zinc-300 hover:bg-[#20202C] border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
         🤫 Reshmi Whisper
       </button>
-      <button onclick="KahaniApp.filter('romance', this)" class="cat-tab bg-zinc-900 text-zinc-300 hover:bg-zinc-800 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
+      <button onclick="KahaniApp.filter('romance', this)" class="cat-tab bg-[#181822] text-zinc-300 hover:bg-[#20202C] border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
         ❤️ Desi Romance
       </button>
-      <button onclick="KahaniApp.filter('mystery', this)" class="cat-tab bg-zinc-900 text-zinc-300 hover:bg-zinc-800 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
+      <button onclick="KahaniApp.filter('mystery', this)" class="cat-tab bg-[#181822] text-zinc-300 hover:bg-[#20202C] border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all" aria-selected="false">
         🌙 Nawabi Shaam
       </button>
     </nav>
@@ -116,12 +127,12 @@
   </main>
 
   <!-- PERSISTENT AUDIO PLAYER BAR -->
-  <div id="global-player" class="fixed bottom-0 left-0 right-0 z-50 bg-[#0C0C0E]/95 backdrop-blur-xl border-t border-amber-500/20 px-4 md:px-8 py-3 shadow-2xl">
+  <div id="global-player" class="fixed bottom-0 left-0 right-0 z-50 bg-[#101015]/95 backdrop-blur-xl border-t border-amber-500/20 px-4 md:px-8 py-3 shadow-2xl">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       
       <!-- Metadata -->
       <div class="flex items-center gap-3 w-1/3 min-w-0">
-        <div id="player-cover" class="w-11 h-11 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 text-lg font-bold flex-shrink-0">
+        <div id="player-cover" class="w-11 h-11 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 text-lg font-bold flex-shrink-0 shadow-inner">
           🪈
         </div>
         <div class="min-w-0">
@@ -132,13 +143,13 @@
 
       <!-- Playback Controls -->
       <div class="flex flex-col items-center w-1/3 gap-1">
-        <button onclick="KahaniPlayer.togglePlay()" id="play-btn" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-400 text-black flex items-center justify-center font-bold transition-transform active:scale-95 shadow-lg shadow-amber-500/20">
+        <button onclick="KahaniPlayer.togglePlay()" id="play-btn" aria-label="Play or Pause Story" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-400 text-black flex items-center justify-center font-bold transition-transform active:scale-95 shadow-lg shadow-amber-500/20">
           ▶
         </button>
         <span id="player-status" class="text-[10px] font-medium text-zinc-400">Ready</span>
       </div>
 
-      <!-- Extended BGM Meta -->
+      <!-- BGM Status -->
       <div class="flex items-center justify-end w-1/3 gap-3 text-xs text-zinc-400">
         <div id="eq-indicator" class="hidden items-end gap-[2px] h-4 px-2">
           <span class="w-[2px] bg-amber-400 eq-bar"></span>
@@ -146,43 +157,48 @@
           <span class="w-[2px] bg-amber-400 eq-bar"></span>
           <span class="w-[2px] bg-amber-400 eq-bar"></span>
         </div>
-        <span class="hidden sm:inline-block px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 text-[10px] font-semibold">
-          ✨ Flute BGM Active
+        <span class="hidden sm:inline-block px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 text-[10px] font-semibold">
+          ✨ Ultra-Soft Flute (1.5%)
         </span>
       </div>
 
     </div>
   </div>
 
-  <!-- COMPLETE ENGINE SCRIPT -->
+  <!-- APPLICATION ENGINE SCRIPT -->
   <script>
-    // Audio stream samples
+    // Audio stream URLs
     const SAMPLE_AUDIO_STREAMS = [
       "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
       "https://cdn.pixabay.com/download/audio/2022/10/14/audio_9939f792cb.mp3",
       "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3"
     ];
 
-    // High Quality Foreigner Model Portrait IDs for stunning visual variety
-    const MODEL_PHOTO_IDS = [
-      "1534528741775-53994a69daeb", "1517841905240-472988babdf9", "1524504388940-b1c1722653e1",
-      "1494790108377-be9c29b29330", "1507003211169-0a1dd7228f2d", "1539571696357-5a69c17a67c6",
-      "1529626455594-4ff0802cfb7e", "1488426862026-3ee34a7d66df", "1544005313-94ddf0286df2",
-      "1508214751196-bcfd4ca60f91", "1531746020798-e6953c6e8e04", "1519085360753-af0119f7cbe7"
+    // Curated Female Portrait Photo IDs
+    const FEMALE_MODEL_PHOTO_IDS = [
+      "1534528741775-53994a69daeb",
+      "1517841905240-472988babdf9",
+      "1524504388940-b1c1722653e1",
+      "1494790108377-be9c29b29330",
+      "1529626455594-4ff0802cfb7e",
+      "1488426862026-3ee34a7d66df",
+      "1544005313-94ddf0286df2",
+      "1508214751196-bcfd4ca60f91",
+      "1531746020798-e6953c6e8e04",
+      "1519085360753-af0119f7cbe7"
     ];
 
-    // GENERATE 100 STORIES WITH UNIQUE STUNNING FOREIGN MODEL PORTRAITS
+    // Dynamic story generator (100 episodes)
     const STORIES_DATA = Array.from({ length: 100 }, (_, i) => {
       const categories = ['whisper', 'romance', 'mystery'];
       const voices = ['Riya', 'Priya', 'Ananya', 'Meera', 'Kavya'];
-      const photoId = MODEL_PHOTO_IDS[i % MODEL_PHOTO_IDS.length];
+      const photoId = FEMALE_MODEL_PHOTO_IDS[i % FEMALE_MODEL_PHOTO_IDS.length];
       
       return {
         id: i + 1,
         title: `Kahani #${i + 1} — ${['Reshmi Baatein', 'Nawabi Shaam', 'Chupke Se', 'Raat Ki Aawaz', 'Ankahi Dastaan'][i % 5]}`,
         category: categories[i % categories.length],
         voiceName: voices[i % voices.length],
-        // High quality portrait image URL with custom tint seed
         image: `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=400&h=500&q=80&sig=${i + 1}`,
         audioUrl: SAMPLE_AUDIO_STREAMS[i % SAMPLE_AUDIO_STREAMS.length],
         script: "Suno na... Aaj raat ki hawa mein ek alag hi nasha hai. Bahar halki baarish ho rahi hai aur ghar mein sirf hum dono hain...",
@@ -199,11 +215,11 @@
 
       filter(category, el) {
         document.querySelectorAll('.cat-tab').forEach(tab => {
-          tab.className = 'cat-tab bg-zinc-900 text-zinc-300 hover:bg-zinc-800 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all';
+          tab.className = 'cat-tab bg-[#181822] text-zinc-300 hover:bg-[#20202C] border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all';
           tab.setAttribute('aria-selected', 'false');
         });
 
-        el.className = 'cat-tab bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all';
+        el.className = 'cat-tab bg-amber-500 text-black px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all shadow-md shadow-amber-500/10';
         el.setAttribute('aria-selected', 'true');
 
         const filtered = category === 'all' 
@@ -217,9 +233,9 @@
         const grid = document.getElementById('story-grid');
         if (!grid) return;
         grid.innerHTML = stories.map(s => `
-          <article onclick="KahaniPlayer.playStory(${s.id})" class="group bg-[#121215] hover:bg-[#1A1A1E] border border-white/5 hover:border-amber-500/40 rounded-2xl p-3.5 transition-all duration-300 cursor-pointer flex flex-col justify-between shadow-xl">
+          <article onclick="KahaniPlayer.playStory(${s.id})" class="group bg-[#181822] hover:bg-[#20202C] border border-white/10 hover:border-amber-500/40 rounded-2xl p-3.5 transition-all duration-300 cursor-pointer flex flex-col justify-between shadow-lg hover:shadow-2xl hover:shadow-amber-500/5">
             <div>
-              <div class="aspect-[3/4] rounded-xl overflow-hidden mb-3 relative bg-zinc-800">
+              <div class="aspect-[3/4] rounded-xl overflow-hidden mb-3 relative bg-zinc-800 border border-white/5">
                 <img src="${s.image}" alt="${s.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
                 <button aria-label="Play ${s.title}" class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-amber-500 text-black font-bold flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all shadow-xl">
                   ▶
@@ -228,7 +244,7 @@
               <h3 class="font-bold text-sm text-zinc-100 truncate serif-title group-hover:text-amber-400">${s.title}</h3>
               <p class="text-[11px] text-amber-300/80 font-medium mt-0.5">👩 Narrator: ${s.voiceName}</p>
             </div>
-            <div class="mt-3 pt-2 border-t border-white/5 flex justify-between items-center text-[10px] text-zinc-400">
+            <div class="mt-3 pt-2 border-t border-white/10 flex justify-between items-center text-[10px] text-zinc-400">
               <span>⏱ ${s.duration} mins</span>
               <span class="text-amber-400 font-medium">🪈 Full Story</span>
             </div>
@@ -252,18 +268,23 @@
         this.currentStory = story;
         document.getElementById('player-title').innerText = story.title;
         document.getElementById('player-artist').innerText = `${story.voiceName} • Full Episode`;
-        document.getElementById('player-status').innerText = '⚡ Loading Audio...';
+        document.getElementById('player-status').innerText = '⚡ Loading...';
         document.getElementById('play-btn').innerText = '⏳';
 
         this.audio.src = story.audioUrl;
-        this.bgm.volume = 0.08;
+        
+        // Voice Audio set to maximum volume (100%)
+        this.audio.volume = 1.0;
+        
+        // Ambient background flute set to ultra-soft level (1.5%)
+        this.bgm.volume = 0.015;
         this.bgm.loop = true;
 
         try {
           await Promise.all([this.audio.play(), this.bgm.play()]);
           this.updatePlaybackState(true, '🟢 Playing Full Episode');
         } catch (err) {
-          console.warn('[Audio Engine] Buffering issue, using voice fallback.', err);
+          console.warn('[Audio Engine] Audio stream interrupted, activating voice narrator fallback.', err);
           this.playBrowserFallback(story.script);
         }
 
@@ -282,8 +303,9 @@
         utterance.rate = 0.85;
 
         utterance.onstart = () => {
+          this.bgm.volume = 0.015;
           this.bgm.play();
-          this.updatePlaybackState(true, '🔊 Playing Voice Preview');
+          this.updatePlaybackState(true, '🔊 Playing Voice Narration');
         };
 
         utterance.onend = () => {
