@@ -2,8 +2,12 @@
 <html lang="hi" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  
+  <!-- SEO & META TAGS (FIXES METADATA FAIL) -->
   <title>KahaniSuno — Premium Audio Storytelling Platform</title>
+  <meta name="description" content="Suno sabhi pyari aur intimate desi audio stories KahaniSuno par. Romantic, whisper, aur mystery kahaniyan high-quality female voices mein.">
+  <meta name="robots" content="index, follow">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -54,13 +58,13 @@
 
     /* Glassmorphism */
     .glass-panel {
-      background: rgba(16, 16, 20, 0.75);
+      background: rgba(16, 16, 20, 0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .glass-card {
-      background: rgba(22, 22, 28, 0.6);
+      background: rgba(22, 22, 28, 0.7);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
@@ -90,13 +94,13 @@
       border-radius: 9999px;
     }
     input[type=range]::-webkit-slider-thumb {
-      height: 12px;
-      width: 12px;
+      height: 14px;
+      width: 14px;
       border-radius: 50%;
       background: #F59E0B;
       cursor: pointer;
       -webkit-appearance: none;
-      margin-top: -4px;
+      margin-top: -5px;
       box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
     }
   </style>
@@ -115,17 +119,17 @@
         <span class="text-xl font-bold tracking-tight serif-title text-amber-400">Kahani<span class="text-white">Suno</span></span>
       </a>
 
-      <!-- Search Bar -->
+      <!-- Desktop Search Bar -->
       <div class="hidden md:flex flex-1 max-w-md relative">
         <input 
           type="text" 
           id="desktop-search" 
           oninput="KahaniApp.handleSearch(this.value)"
           placeholder="Kahaniyan, voice artists, ya categories khojein..." 
-          class="w-full bg-bg-card/80 border border-white/10 focus:border-amber-500/50 rounded-full py-2 pl-10 pr-10 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all"
+          class="w-full bg-bg-card/80 border border-white/10 focus:border-amber-500/50 rounded-full py-2.5 pl-10 pr-10 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all"
           aria-label="Search Audio Stories"
         />
-        <span class="absolute left-3.5 top-2.5 text-zinc-500 text-sm">🔍</span>
+        <span class="absolute left-3.5 top-3 text-zinc-500 text-xs">🔍</span>
         <button id="search-clear-btn" onclick="KahaniApp.clearSearch()" class="hidden absolute right-3 top-2.5 text-zinc-400 hover:text-white text-xs">✕</button>
 
         <!-- Search Suggestions Dropdown -->
@@ -136,8 +140,8 @@
 
       <!-- User Actions -->
       <div class="flex items-center space-x-3">
-        <button onclick="KahaniApp.toggleFavoritesModal()" class="p-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-amber-400 transition-all text-sm relative" aria-label="View Favorites">
-          ❤️ <span id="fav-badge" class="hidden absolute -top-1 -right-1 w-4 h-4 bg-amber-500 text-black font-bold text-[9px] rounded-full flex items-center justify-center">0</span>
+        <button onclick="KahaniApp.toggleFavoritesModal()" class="p-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-amber-400 transition-all text-xs relative" aria-label="View Favorites">
+          ❤️ <span id="fav-badge" class="hidden absolute -top-1 -right-1 w-4 h-4 bg-amber-500 text-black font-bold text-[12px] rounded-full flex items-center justify-center">0</span>
         </button>
         <button onclick="KahaniPlayer.playRandomStory()" class="px-5 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs transition-all transform active:scale-95 shadow-lg shadow-amber-500/20 flex items-center gap-2">
           <span>🎲</span> <span class="hidden sm:inline">Suno Abhi</span>
@@ -146,7 +150,7 @@
     </div>
 
     <!-- Mobile Search Trigger -->
-    <div class="mt-2 md:hidden">
+    <div class="mt-2.5 md:hidden">
       <input 
         type="text" 
         id="mobile-search" 
@@ -163,26 +167,26 @@
     <!-- HERO FEATURED STORY BANNER -->
     <section id="hero-banner" class="relative rounded-3xl overflow-hidden border border-white/10 glass-card p-6 md:p-10">
       <div class="absolute inset-0 bg-gradient-to-r from-bg-base via-bg-base/80 to-transparent z-10"></div>
-      <img id="hero-bg-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80" alt="Featured Story Artwork" class="absolute inset-0 w-full h-full object-cover object-center opacity-40 scale-105 transition-all duration-700">
+      <img id="hero-bg-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=75" alt="Featured Story Artwork" class="absolute inset-0 w-full h-full object-cover object-center opacity-40 scale-105 transition-all duration-700">
 
       <div class="relative z-20 max-w-2xl space-y-4">
         <div class="flex items-center gap-2">
-          <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-[11px] font-bold tracking-wider uppercase">
+          <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs font-bold tracking-wider uppercase">
             ⭐ Today's Featured Choice
           </span>
-          <span class="text-xs text-zinc-400">| 4.9 ★★★★★ (1.2k+ reviews)</span>
+          <span class="text-xs text-zinc-300">| 4.9 ★★★★★ (1.2k+ reviews)</span>
         </div>
 
         <h1 id="hero-title" class="text-3xl md:text-5xl font-extrabold serif-title leading-tight text-white drop-shadow-lg">
           Reshmi Baatein — Episode 01
         </h1>
 
-        <p id="hero-desc" class="text-xs md:text-sm text-zinc-300 line-clamp-2 leading-relaxed">
+        <p id="hero-desc" class="text-xs md:text-sm text-zinc-200 line-clamp-2 leading-relaxed">
           Suno na... Aaj ki raat badi ajeeb aur udas lag rahi hai. Bahar aangan mein thandi purvaiya hawa chal rahi hai, aur main akele baith kar tumhara intezar kar rahi hoon...
         </p>
 
-        <!-- Meta Pills -->
-        <div class="flex flex-wrap items-center gap-4 text-xs text-zinc-300 pt-1">
+        <!-- Meta Pills (All font sizes set to min 12px for Mobile Legibility) -->
+        <div class="flex flex-wrap items-center gap-4 text-xs text-zinc-200 pt-1">
           <span class="flex items-center gap-1">👩 Voice: <strong id="hero-voice" class="text-amber-400">Riya</strong></span>
           <span>•</span>
           <span class="flex items-center gap-1">⏱ Duration: <strong id="hero-duration" class="text-zinc-200">14:00 Mins</strong></span>
@@ -193,7 +197,7 @@
         <!-- Hero Actions -->
         <div class="flex flex-wrap items-center gap-3 pt-3">
           <button id="hero-play-btn" onclick="KahaniPlayer.playStory(1)" class="px-6 py-3 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs transition-all transform active:scale-95 shadow-xl shadow-amber-500/25 flex items-center gap-2">
-            <span class="text-sm">▶</span> Abhi Suno
+            <span class="text-xs">▶</span> Abhi Suno
           </button>
           <button id="hero-bookmark-btn" onclick="KahaniApp.toggleBookmark(1)" class="px-4 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-white font-semibold text-xs transition-all flex items-center gap-1.5">
             🔖 Wishlist Mein Jodein
@@ -239,7 +243,6 @@
         <h2 class="text-xl font-bold serif-title text-white flex items-center gap-2">
           <span>🔥</span> Trending Today
         </h2>
-        <span class="text-xs text-amber-400/80 font-medium cursor-pointer hover:underline" onclick="KahaniApp.filter('all', document.querySelectorAll('.cat-tab')[0])">View All →</span>
       </div>
       <div id="trending-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         <!-- Rendered via JS -->
@@ -277,7 +280,7 @@
     <div class="glass-panel border border-white/10 rounded-3xl p-6 max-w-lg w-full space-y-4 max-h-[80vh] flex flex-col">
       <div class="flex items-center justify-between border-b border-white/10 pb-3">
         <h3 class="text-lg font-bold serif-title text-amber-400">🔖 Aapki Wishlist Kahaniyan</h3>
-        <button onclick="KahaniApp.toggleFavoritesModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+        <button onclick="KahaniApp.toggleFavoritesModal()" class="text-zinc-400 hover:text-white text-base">✕</button>
       </div>
       <div id="favorites-list" class="flex-1 overflow-y-auto space-y-3 no-scrollbar">
         <!-- JS rendered -->
@@ -285,31 +288,31 @@
     </div>
   </div>
 
-  <!-- PERSISTENT BOTTOM PLAYER (MINI PLAYER) -->
+  <!-- PERSISTENT BOTTOM PLAYER -->
   <div id="global-player" class="fixed bottom-0 left-0 right-0 z-50 glass-panel border-t border-amber-500/20 px-4 md:px-8 py-3 transition-all duration-300">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       
       <!-- Mini Artwork & Metadata -->
       <div onclick="KahaniPlayer.toggleFullPlayer(true)" class="flex items-center gap-3 w-1/3 min-w-0 cursor-pointer group">
-        <img id="player-cover-img" src="https://images.unsplash.com/photo-11534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Current Cover" class="w-12 h-12 rounded-xl object-cover border border-amber-500/30 shadow-md group-hover:scale-105 transition-transform" />
+        <img id="player-cover-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=70" alt="Current Cover" class="w-12 h-12 rounded-xl object-cover border border-amber-500/30 shadow-md group-hover:scale-105 transition-transform" />
         <div class="min-w-0">
           <h4 id="player-title" class="text-xs md:text-sm font-bold text-white truncate serif-title group-hover:text-amber-400 transition-colors">Kahani Chuno</h4>
-          <p id="player-artist" class="text-[11px] text-amber-400/80 truncate">Desi Female Voice</p>
+          <p id="player-artist" class="text-xs text-amber-400/90 truncate">Desi Female Voice</p>
         </div>
       </div>
 
       <!-- Playback Controls -->
       <div class="flex flex-col items-center w-1/3 max-w-xs gap-1.5">
         <div class="flex items-center gap-3">
-          <button onclick="KahaniPlayer.skipTime(-10)" class="text-zinc-400 hover:text-white text-xs p-1" aria-label="Rewind 10 Seconds">↺ 10s</button>
-          <button onclick="KahaniPlayer.togglePlay()" id="play-btn" aria-label="Play or Pause" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-400 text-black flex items-center justify-center font-extrabold text-sm transition-transform active:scale-95 shadow-lg shadow-amber-500/20">
+          <button onclick="KahaniPlayer.skipTime(-10)" class="text-zinc-300 hover:text-white text-xs p-1" aria-label="Rewind 10 Seconds">↺ 10s</button>
+          <button onclick="KahaniPlayer.togglePlay()" id="play-btn" aria-label="Play or Pause" class="w-10 h-10 rounded-full bg-amber-500 hover:bg-amber-400 text-black flex items-center justify-center font-extrabold text-xs transition-transform active:scale-95 shadow-lg shadow-amber-500/20">
             ▶
           </button>
-          <button onclick="KahaniPlayer.skipTime(10)" class="text-zinc-400 hover:text-white text-xs p-1" aria-label="Forward 10 Seconds">10s ↻</button>
+          <button onclick="KahaniPlayer.skipTime(10)" class="text-zinc-300 hover:text-white text-xs p-1" aria-label="Forward 10 Seconds">10s ↻</button>
         </div>
 
         <!-- Progress Bar & Timer -->
-        <div class="w-full flex items-center gap-2 text-[10px] text-zinc-400">
+        <div class="w-full flex items-center gap-2 text-xs text-zinc-300">
           <span id="player-time-current">0:00</span>
           <input type="range" id="player-progress" value="0" min="0" max="100" oninput="KahaniPlayer.seek(this.value)" class="flex-1 h-1">
           <span id="player-time-duration">0:00</span>
@@ -318,13 +321,10 @@
 
       <!-- Controls & Expand -->
       <div class="flex items-center justify-end w-1/3 gap-3">
-        <!-- Speed Toggle -->
-        <button onclick="KahaniPlayer.cycleSpeed()" id="speed-btn" class="px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] font-bold text-amber-400 hover:bg-white/10">1.0x</button>
+        <button onclick="KahaniPlayer.cycleSpeed()" id="speed-btn" class="px-2 py-1 rounded bg-white/5 border border-white/10 text-xs font-bold text-amber-400 hover:bg-white/10">1.0x</button>
         
-        <!-- Sleep Timer -->
-        <button onclick="KahaniPlayer.cycleSleepTimer()" id="sleep-btn" class="hidden sm:inline-block px-2 py-1 rounded bg-white/5 border border-white/10 text-[10px] font-medium text-zinc-300 hover:bg-white/10">⏱ Off</button>
+        <button onclick="KahaniPlayer.cycleSleepTimer()" id="sleep-btn" class="hidden sm:inline-block px-2 py-1 rounded bg-white/5 border border-white/10 text-xs font-medium text-zinc-200 hover:bg-white/10">⏱ Off</button>
 
-        <!-- EQ Animation -->
         <div id="eq-indicator" class="hidden items-end gap-[2px] h-4 px-1">
           <span class="w-[2px] bg-amber-400 eq-bar"></span>
           <span class="w-[2px] bg-amber-400 eq-bar"></span>
@@ -332,8 +332,7 @@
           <span class="w-[2px] bg-amber-400 eq-bar"></span>
         </div>
 
-        <!-- Full Player Expand Trigger -->
-        <button onclick="KahaniPlayer.toggleFullPlayer(true)" class="p-2 text-zinc-400 hover:text-white text-sm" aria-label="Expand Player">
+        <button onclick="KahaniPlayer.toggleFullPlayer(true)" class="p-2 text-zinc-300 hover:text-white text-xs" aria-label="Expand Player">
           ⤢
         </button>
       </div>
@@ -344,19 +343,17 @@
   <!-- FULL SCREEN EXPANDED PLAYER OVERLAY -->
   <div id="full-player-modal" class="hidden fixed inset-0 z-50 glass-panel bg-bg-base/95 backdrop-blur-2xl flex flex-col justify-between p-6 md:p-12 transition-all duration-500">
     
-    <!-- Top Modal Header -->
     <div class="flex items-center justify-between">
-      <button onclick="KahaniPlayer.toggleFullPlayer(false)" class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-white text-sm">
+      <button onclick="KahaniPlayer.toggleFullPlayer(false)" class="p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-white text-xs">
         ✕ Band Karein
       </button>
       <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Now Playing — KahaniSuno</span>
-      <button onclick="KahaniApp.shareCurrentStory()" class="p-2 text-zinc-400 hover:text-white">🔗</button>
+      <button onclick="KahaniApp.shareCurrentStory()" class="p-2 text-zinc-300 hover:text-white text-xs">🔗</button>
     </div>
 
-    <!-- Center Content Artwork & Title -->
     <div class="max-w-md w-full mx-auto my-auto text-center space-y-6">
       <div class="relative aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-amber-500/10 mx-auto">
-        <img id="full-player-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Full Story Artwork" class="w-full h-full object-cover">
+        <img id="full-player-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=75" alt="Full Story Artwork" class="w-full h-full object-cover">
       </div>
 
       <div class="space-y-1">
@@ -364,27 +361,24 @@
         <p id="full-player-artist" class="text-xs text-amber-400 font-medium">Desi Female Voice</p>
       </div>
 
-      <!-- Scrubber -->
       <div class="space-y-1">
         <input type="range" id="full-player-progress" value="0" min="0" max="100" oninput="KahaniPlayer.seek(this.value)" class="w-full">
-        <div class="flex justify-between text-[11px] text-zinc-400">
+        <div class="flex justify-between text-xs text-zinc-300">
           <span id="full-player-time-current">0:00</span>
           <span id="full-player-time-duration">0:00</span>
         </div>
       </div>
 
-      <!-- Playback Controls Grid -->
       <div class="flex items-center justify-center gap-6 pt-2">
-        <button onclick="KahaniPlayer.skipTime(-10)" class="text-zinc-300 hover:text-amber-400 text-lg">↺ 10s</button>
-        <button onclick="KahaniPlayer.togglePlay()" id="full-play-btn" class="w-16 h-16 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-2xl flex items-center justify-center shadow-xl shadow-amber-500/30">
+        <button onclick="KahaniPlayer.skipTime(-10)" class="text-zinc-300 hover:text-amber-400 text-sm">↺ 10s</button>
+        <button onclick="KahaniPlayer.togglePlay()" id="full-play-btn" class="w-16 h-16 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xl flex items-center justify-center shadow-xl shadow-amber-500/30">
           ▶
         </button>
-        <button onclick="KahaniPlayer.skipTime(10)" class="text-zinc-300 hover:text-amber-400 text-lg">10s ↻</button>
+        <button onclick="KahaniPlayer.skipTime(10)" class="text-zinc-300 hover:text-amber-400 text-sm">10s ↻</button>
       </div>
     </div>
 
-    <!-- Bottom Action Controls -->
-    <div class="max-w-md w-full mx-auto flex items-center justify-between text-xs text-zinc-400 border-t border-white/10 pt-4">
+    <div class="max-w-md w-full mx-auto flex items-center justify-between text-xs text-zinc-300 border-t border-white/10 pt-4">
       <button onclick="KahaniPlayer.cycleSpeed()" id="full-speed-btn" class="hover:text-amber-400">Speed: 1.0x</button>
       <button onclick="KahaniPlayer.cycleSleepTimer()" id="full-sleep-btn" class="hover:text-amber-400">Sleep Timer: Off</button>
     </div>
@@ -392,13 +386,12 @@
 
   <!-- APPLICATION ENGINE SCRIPT -->
   <script>
-    // BACKEND CONFIGURATION: Replace with your actual ElevenLabs API Key
     const BACKEND_ELEVENLABS_KEY = "42a6c4b58b2c4f0491cff693643e98a399507c5159fb6c2b5f70f277658c3082";
 
     const ELEVEN_LABS_VOICE_IDS = [
-      "21m00Tcm4TlvDq8ikWAM", // Rachel
-      "EXAVITQu4vr4xnSDxMaL", // Bella
-      "AZnzlk1XvdvUeBnXmlld"  // Domi
+      "21m00Tcm4TlvDq8ikWAM",
+      "EXAVITQu4vr4xnSDxMaL",
+      "AZnzlk1XvdvUeBnXmlld"
     ];
 
     const FEMALE_MODEL_PHOTO_IDS = [
@@ -421,7 +414,6 @@
       "Aangan ki mitti ki khushbu aur wo haseen mulaqat mujhe aaj bhi yaad aati hai. Kacha makan, dhibri ki madham roshni, aur purani yaadon ko dohrana. Ye safar kitna pyara hai na."
     ];
 
-    // Generate Catalog Data
     const STORIES_DATA = Array.from({ length: 100 }, (_, i) => {
       const categories = ['whisper', 'romance', 'mystery'];
       const categoryNames = { whisper: 'Reshmi Whisper', romance: 'Pyar Aur Ehsaas', mystery: 'Raat Ki Khamoshi' };
@@ -436,7 +428,7 @@
         categoryName: categoryNames[catKey],
         voiceName: voices[i % voices.length],
         voiceId: ELEVEN_LABS_VOICE_IDS[i % ELEVEN_LABS_VOICE_IDS.length],
-        image: `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=400&h=500&q=80&sig=${i + 1}`,
+        image: `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=300&q=70&sig=${i + 1}`,
         script: EXTENDED_STORIES_SCRIPTS[i % EXTENDED_STORIES_SCRIPTS.length],
         duration: `${Math.floor(Math.random() * 10) + 8}:00`,
         rating: (4.5 + (i % 5) * 0.1).toFixed(1),
@@ -445,7 +437,6 @@
       };
     });
 
-    // App State Management
     const KahaniApp = {
       favorites: JSON.parse(localStorage.getItem('ks_favorites') || '[]'),
       history: JSON.parse(localStorage.getItem('ks_history') || '{}'),
@@ -484,25 +475,21 @@
                 <div class="aspect-[3/4] rounded-xl overflow-hidden mb-2.5 relative bg-zinc-800 border border-white/5">
                   <img src="${s.image}" alt="${s.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
                   
-                  <!-- Badges -->
                   <div class="absolute top-2 left-2 flex flex-col gap-1">
-                    ${s.isNew ? `<span class="bg-amber-500 text-black font-extrabold text-[9px] px-2 py-0.5 rounded-full shadow">NEW</span>` : ''}
-                    ${s.isTrending ? `<span class="bg-rose-500 text-white font-bold text-[9px] px-2 py-0.5 rounded-full shadow">🔥 HOT</span>` : ''}
+                    ${s.isNew ? `<span class="bg-amber-500 text-black font-extrabold text-xs px-2 py-0.5 rounded-full shadow">NEW</span>` : ''}
+                    ${s.isTrending ? `<span class="bg-rose-500 text-white font-bold text-xs px-2 py-0.5 rounded-full shadow">🔥 HOT</span>` : ''}
                   </div>
 
-                  <!-- Bookmark Button -->
                   <button onclick="event.stopPropagation(); KahaniApp.toggleBookmark(${s.id})" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-xs transition-transform active:scale-90">
                     ${isFav ? '❤️' : '🤍'}
                   </button>
 
-                  <!-- Play Overlay -->
                   <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <div class="w-12 h-12 rounded-full bg-amber-500 text-black font-bold flex items-center justify-center text-lg shadow-xl shadow-amber-500/40 transform translate-y-2 group-hover:translate-y-0 transition-all">
+                    <div class="w-12 h-12 rounded-full bg-amber-500 text-black font-bold flex items-center justify-center text-base shadow-xl shadow-amber-500/40 transform translate-y-2 group-hover:translate-y-0 transition-all">
                       ▶
                     </div>
                   </div>
 
-                  <!-- Resume Progress Bar if partially listened -->
                   ${progress > 0 ? `
                     <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
                       <div class="h-full bg-amber-500" style="width: ${progress}%"></div>
@@ -511,10 +498,10 @@
                 </div>
 
                 <h3 class="font-bold text-xs md:text-sm text-zinc-100 truncate serif-title group-hover:text-amber-400 transition-colors">${s.title}</h3>
-                <p class="text-[11px] text-amber-300/80 font-medium mt-0.5">👩 ${s.voiceName} • ${s.rating} ★</p>
+                <p class="text-xs text-amber-300/80 font-medium mt-0.5">👩 ${s.voiceName} • ${s.rating} ★</p>
               </div>
 
-              <div class="mt-2 pt-2 border-t border-white/5 flex justify-between items-center text-[10px] text-zinc-400">
+              <div class="mt-2 pt-2 border-t border-white/5 flex justify-between items-center text-xs text-zinc-300">
                 <span>⏱ ${s.duration}</span>
                 <span class="text-amber-400 font-semibold">Suno →</span>
               </div>
@@ -542,7 +529,7 @@
               <img src="${s.image}" class="w-12 h-12 rounded-lg object-cover" />
               <div class="min-w-0 flex-1">
                 <h4 class="text-xs font-bold text-white truncate serif-title">${s.title}</h4>
-                <p class="text-[10px] text-amber-400">${s.voiceName}</p>
+                <p class="text-xs text-amber-400">${s.voiceName}</p>
                 <div class="w-full bg-white/10 h-1 rounded-full mt-2 overflow-hidden">
                   <div class="bg-amber-500 h-full" style="width: ${this.history[s.id]}%"></div>
                 </div>
@@ -587,14 +574,14 @@
         ).slice(0, 5);
 
         if (results.length === 0) {
-          dropdown.innerHTML = `<p class="text-xs text-zinc-400 text-center py-2">Koi kahani nahi mili...</p>`;
+          dropdown.innerHTML = `<p class="text-xs text-zinc-300 text-center py-2">Koi kahani nahi mili...</p>`;
         } else {
           dropdown.innerHTML = results.map(s => `
             <div onclick="KahaniPlayer.playStory(${s.id}); KahaniApp.clearSearch()" class="flex items-center gap-3 p-2 hover:bg-white/5 rounded-xl cursor-pointer">
               <img src="${s.image}" class="w-10 h-10 rounded-md object-cover" />
               <div class="min-w-0">
                 <h5 class="text-xs font-bold text-white truncate serif-title">${s.title}</h5>
-                <p class="text-[10px] text-amber-400">${s.voiceName} • ${s.categoryName}</p>
+                <p class="text-xs text-amber-400">${s.voiceName} • ${s.categoryName}</p>
               </div>
             </div>
           `).join('');
@@ -637,7 +624,7 @@
         if (modal.classList.contains('hidden')) {
           const favStories = STORIES_DATA.filter(s => this.favorites.includes(s.id));
           if (favStories.length === 0) {
-            list.innerHTML = `<p class="text-xs text-zinc-400 text-center py-8">Aapki wishlist khali hai...</p>`;
+            list.innerHTML = `<p class="text-xs text-zinc-300 text-center py-8">Aapki wishlist khali hai...</p>`;
           } else {
             list.innerHTML = favStories.map(s => `
               <div onclick="KahaniPlayer.playStory(${s.id}); KahaniApp.toggleFavoritesModal()" class="flex items-center justify-between p-3 bg-white/5 rounded-2xl hover:bg-white/10 cursor-pointer">
@@ -645,7 +632,7 @@
                   <img src="${s.image}" class="w-12 h-12 rounded-xl object-cover"/>
                   <div class="min-w-0">
                     <h5 class="text-xs font-bold text-white truncate serif-title">${s.title}</h5>
-                    <p class="text-[10px] text-amber-400">${s.voiceName}</p>
+                    <p class="text-xs text-amber-400">${s.voiceName}</p>
                   </div>
                 </div>
                 <button onclick="event.stopPropagation(); KahaniApp.toggleBookmark(${s.id}); KahaniApp.toggleFavoritesModal()" class="text-xs text-rose-400">Hataein</button>
@@ -677,7 +664,6 @@
       }
     };
 
-    // Spotify-Grade Audio Player Core
     const KahaniPlayer = {
       mainAudio: new Audio(),
       bgmAudio: new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8230553.mp3?filename=indian-meditation-flute-10174.mp3"),
@@ -725,7 +711,6 @@
 
         this.currentStory = story;
         
-        // Update UI Elements
         document.getElementById('player-title').innerText = story.title;
         document.getElementById('player-artist').innerText = `${story.voiceName} • ${story.categoryName}`;
         document.getElementById('player-cover-img').src = story.image;
@@ -803,7 +788,6 @@
         document.getElementById('full-player-time-current').innerText = this.formatTime(current);
         document.getElementById('full-player-time-duration').innerText = this.formatTime(total);
 
-        // Save progress for Continue Listening
         if (this.currentStory) {
           KahaniApp.history[this.currentStory.id] = Math.floor(pct);
           localStorage.setItem('ks_history', JSON.stringify(KahaniApp.history));
@@ -859,7 +843,7 @@
       formatTime(seconds) {
         const m = Math.floor(seconds / 60);
         const s = Math.floor(seconds % 60);
-        return `${m}:${s < 10 ? '0' : ''}${s}`;
+        return `${m}:${s < 10 ? '0' : ''}${s}`;A
       },
 
       onEnded() {
