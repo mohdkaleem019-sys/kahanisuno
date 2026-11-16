@@ -1,42 +1,23 @@
-// Vercel serverless function: POST /api/story  { topic: "..." }
-// Needs the environment variable OPENAI_API_KEY (set in Vercel, never in code).
-const hits = new Map(); // simple per-IP limit (resets when the function restarts)
-const LIMIT = 5, WINDOW = 24 * 60 * 60 * 1000;
-
-module.exports = async (req, res) => {
-  if (req.method !== "POST") return res.status(405).json({ error: "POST only" });
-  const key = process.env.OPENAI_API_KEY;
-  if (!key) return res.status(500).json({ error: "Server key not set" });
-
-  const ip = (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "x";
-  const now = Date.now();
-  const list = (hits.get(ip) || []).filter(t => now - t < WINDOW);
-  if (list.length >= LIMIT) return res.status(429).json({ error: "आज की सीमा पूरी हो गई। कल फिर कोशिश कीजिए।" });
-
-  const topic = String((req.body && req.body.topic) || "").trim().slice(0, 120);
-  if (topic.length < 3) return res.status(400).json({ error: "विषय बहुत छोटा है।" });
-
-  try {
-    const r = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: "Bearer " + key },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        temperature: 0.8,
-        max_tokens: 600,
-        response_format: { type: "json_object" },
-        messages: [
-          { role: "system", content: "तुम एक हिंदी कहानीकार हो। दिए गए विषय पर देवनागरी हिंदी में 150-220 शब्दों की छोटी ऑडियो कहानी लिखो। छोटे वाक्य रखो, ताकि सुनने में अच्छी लगे। कहानी सबके लिए सुरक्षित हो: कोई अश्लील या अत्यधिक हिंसक सामग्री नहीं। केवल JSON लौटाओ: {\"title\":\"...\",\"text\":\"...\"}" },
-          { role: "user", content: "विषय: " + topic }
-        ]
-      })
-    });
-    const d = await r.json();
-    if (!r.ok) throw new Error((d.error && d.error.message) || "OpenAI error");
-    const out = JSON.parse(d.choices[0].message.content);
-    hits.set(ip, [...list, now]);
-    return res.status(200).json({ title: String(out.title || "नई कहानी").slice(0, 80), text: String(out.text || "").slice(0, 2500) });
-  } catch (e) {
-    return res.status(502).json({ error: "कहानी नहीं बन पाई। थोड़ी देर बाद कोशिश कीजिए।" });
-  }
-};
+<!DOCTYPE html>
+<html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KahaniSuno | हिंदी ऑडियो कहानियाँ: हॉरर, रहस्य और सोने से पहले की कहानियाँ</title><meta name="description" content="हिंदी में मुफ़्त ऑडियो कहानियाँ सुनिए: डरावनी हॉरर कहानियाँ, रहस्य कथाएँ और सोने से पहले की सुकून भरी कहानियाँ।">
+<link rel="canonical" href="https://www.khanisuno.in/"><meta name="theme-color" content="#080c1c">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.json">
+<link rel="alternate" type="application/rss+xml" title="KahaniSuno" href="/feed.xml">
+<meta property="og:type" content="website"><meta property="og:site_name" content="KahaniSuno"><meta property="og:title" content="KahaniSuno | हिंदी ऑडियो कहानियाँ: हॉरर, रहस्य और सोने से पहले की कहानियाँ"><meta property="og:description" content="हिंदी में मुफ़्त ऑडियो कहानियाँ सुनिए: डरावनी हॉरर कहानियाँ, रहस्य कथाएँ और सोने से पहले की सुकून भरी कहानियाँ।"><meta property="og:url" content="https://www.khanisuno.in/"><meta property="og:locale" content="hi_IN">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "KahaniSuno", "url": "https://www.khanisuno.in", "inLanguage": "hi"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "KahaniSuno क्या है?", "acceptedAnswer": {"@type": "Answer", "text": "KahaniSuno एक मुफ़्त हिंदी ऑडियो कहानी वेबसाइट है, जहाँ हॉरर, रहस्य और सोने से पहले की कहानियाँ सुनी जा सकती हैं।"}}, {"@type": "Question", "name": "क्या कहानियाँ मुफ़्त हैं?", "acceptedAnswer": {"@type": "Answer", "text": "हाँ, सभी कहानियाँ पढ़ने और सुनने के लिए पूरी तरह मुफ़्त हैं।"}}, {"@type": "Question", "name": "क्या मैं कहानी बीच में छोड़कर बाद में सुन सकता हूँ?", "acceptedAnswer": {"@type": "Answer", "text": "हाँ, आपकी जगह इसी डिवाइस पर याद रहती है, इसलिए आप वहीं से आगे सुन सकते हैं।"}}, {"@type": "Question", "name": "नई कहानियाँ कब आती हैं?", "acceptedAnswer": {"@type": "Answer", "text": "हम नियमित रूप से नए एपिसोड जोड़ते हैं। अपडेट के लिए पेज के नीचे दिया चैनल लिंक देखें।"}}]}</script></head><body >
+<header><div class="wrap nav"><a class="logo" href="/">Kahani<span>Suno</span></a>
+<nav><a href="/category/horror.html">हॉरर</a><a href="/category/rahasya.html">रहस्य</a><a href="/category/bedtime.html">सोने से पहले</a><a href="/about.html">हमारे बारे में</a></nav></div></header>
+<main class="wrap"><section class="hero"><div class="moon"></div><h1>रात की कहानियाँ, <b>कानों के लिए।</b></h1>
+<p>हिंदी ऑडियो कहानियाँ: डरावनी हॉरर, चौंकाने वाले रहस्य और नींद से पहले की मीठी कहानियाँ। छोटे एपिसोड, कहीं भी सुनिए।</p>
+<a class="btn" href="/kahani/haveli-ka-raaz-1.html">▶ पहली कहानी सुनें</a><button id="random" class="btn alt">🎲 कोई भी कहानी</button>
+<div class="stats"><span>📚 10 कहानियाँ</span><span>🆓 पूरी तरह मुफ़्त</span><span>📱 मोबाइल पर तेज़</span></div></section>
+<div id="resume" class="resume"><span></span><a class="btn" href="#">▶ जारी रखें</a></div>
+<input id="q" class="search" type="search" placeholder="🔎 कहानी खोजें... जैसे हवेली, ट्रेन, जुगनू" aria-label="कहानी खोजें">
+<div class="chips"><button class="chip on" data-c="all">सब</button><button class="chip" data-c="horror">👻 हॉरर</button><button class="chip" data-c="rahasya">🔍 रहस्य</button><button class="chip" data-c="bedtime">🌙 सोने से पहले</button><button class="chip" data-fav="1">♥ मेरी पसंद</button></div>
+<div class="grid"><a class="card" href="/kahani/haveli-ka-raaz-1.html" data-s="haveli-ka-raaz-1" data-c="horror" data-t="हवेली का राज़ (भाग 1) गाँव के बाहर की उस हवेली में रात को दीया क्यों जलता है? Haveli Ka Raaz Part 1 | Hindi Horror Story"><div class="cover c-horror"><button class="fav" data-slug="haveli-ka-raaz-1" aria-label="पसंद में जोड़ें">♡</button><span>👻</span><span class="min">1 मिनट</span></div><div class="cb"><span class="tag horror">हॉरर</span><h3>हवेली का राज़ (भाग 1)</h3><p>गाँव के बाहर की उस हवेली में रात को दीया क्यों जलता है?</p></div></a><a class="card" href="/kahani/haveli-ka-raaz-2.html" data-s="haveli-ka-raaz-2" data-c="horror" data-t="हवेली का राज़ (भाग 2) ऊपर के कमरे में रोहन को जो मिला, उसने सब बदल दिया। Haveli Ka Raaz Part 2 | Hindi Horror Story"><div class="cover c-horror"><button class="fav" data-slug="haveli-ka-raaz-2" aria-label="पसंद में जोड़ें">♡</button><span>👻</span><span class="min">1 मिनट</span></div><div class="cb"><span class="tag horror">हॉरर</span><h3>हवेली का राज़ (भाग 2)</h3><p>ऊपर के कमरे में रोहन को जो मिला, उसने सब बदल दिया।</p></div></a><a class="card" href="/kahani/raat-ke-12-baje.html" data-s="raat-ke-12-baje" data-c="horror" data-t="रात के 12 बजे ठीक बारह बजे फ़ोन की घंटी बजी... और दूसरी तरफ़ अपनी ही आवाज़ थी। Raat Ke 12 Baje | Hindi Horror Kahani"><div class="cover c-horror"><button class="fav" data-slug="raat-ke-12-baje" aria-label="पसंद में जोड़ें">♡</button><span>👻</span><span class="min">1 मिनट</span></div><div class="cb"><span class="tag horror">हॉरर</span><h3>रात के 12 बजे</h3><p>ठीक बारह बजे फ़ोन की घंटी बजी... और दूसरी तरफ़ अपनी ही आवाज़ थी।</p></div></a><a class="card" href="/kahani/suna-station.html" data-s="suna-station" data-c="horror" data-t="सूना स्टेशन आख़िरी ट्रेन छूट गई थी। प्लेटफ़ॉर्म पर वह अकेला नहीं था। Suna Station | Hindi Horror Story"><div class="cover c-horror"><button class="fav" data-slug="suna-station" aria-label="पसंद में जोड़ें">♡</button><span>👻</span><span class="min">1 मिनट</span></div><div class="cb"><span class="tag horror">हॉरर</span><h3>सूना स्टेशन</h3><p>आख़िरी ट्रेन छूट गई थी। प्लेटफ़ॉर्म पर वह अकेला नहीं था।</p></div></a><a class="card" href="/kahani/aakhiri-bus.html" data-s="aakhiri-bus" data-c="horror" data-t="आख़िरी बस बस में हर सवारी चुप थी, और किसी के पैर ज़मीन पर नहीं थे। Aakhiri Bus | Hindi Horror Kahani"><div class="cover c-horror"><button class="fav" data-slug="aakhiri-bus" aria-label="पसंद में जोड़ें">♡</button><span>👻</span><span class="min">1 मिनट</span></div><div class="cb"><span class="tag horror">हॉरर</span><h3>आख़िरी बस</h3><p>बस में हर सवारी चुप थी, और किसी के पैर ज़मीन पर नहीं थे।</p></div></a><a class="card" href="/kahani/band-darwaza.html" data-s="band-darwaza" data-c="rahasya" data-t="बंद दरवाज़ा पुराने घर का एक कमरा तीस साल से क्यों बंद था? Band Darwaza | Hindi Mystery Story"><div class="cover c-rahasya"><button class="fav" data-slug="band-darwaza" aria-label="पसंद में जोड़ें">♡</button><span>🔍</span><span class="min">1 मिनट</span></div><div class="cb"><span class="tag rahasya">रहस्य</span><h3>बंद दरवाज़ा</h3><p>पुराने घर का एक कमरा तीस साल से क्यों बंद था?</p></div></a><a class="card" href="/kahani/gumshuda-chitthi.html" data-s="gumshuda-chitthi" data-c="rahasya" data-t="गुमशुदा चिट्ठी डाकिये की थैली में एक ऐसी चिट्ठी थी जो पचास साल पुरानी थी। Gumshuda Chitthi | Hindi Rahasya Kahani"><div class="cover c-rahasya"><button class="fav" data-slug="gumshuda-chitthi" aria-label="पसंद में जोड़ें">♡</button><span>🔍</span><span class="min">1 मिनट</span></div><div class="cb"><span class="tag rahasya">रहस्य</span><h3>गुमशुदा चिट्ठी</h3><p>डाकिये की थैली में एक ऐसी चिट्ठी थी जो पचास साल पुरानी थी।</p></div></a><a class="card" href="/kahani/purani-ghadi.html" data-s="purani-ghadi" data-c="rahasya" data-t="पुरानी घड़ी का रहस्य बंद पड़ी घड़ी हर रात ठीक तीन बजे क्यों चल पड़ती थी? Purani Ghadi Ka Rahasya | Hindi Mystery Story"><div class="cover c-rahasya"><button class="fav" data-slug="purani-ghadi" aria-label="पसंद में जोड़ें">♡</button><span>🔍</span><span class="min">1 मिनट</span></div><div class="cb"><span class="tag rahasya">रहस्य</span><h3>पुरानी घड़ी का रहस्य</h3><p>बंद पड़ी घड़ी हर रात ठीक तीन बजे क्यों चल पड़ती थी?</p></div></a><a class="card" href="/kahani/jugnu-ki-roshni.html" data-s="jugnu-ki-roshni" data-c="bedtime" data-t="जुगनू की रोशनी एक नन्हे जुगनू ने अँधेरे जंगल को कैसे रोशन कर दिया। Jugnu Ki Roshni | Bedtime Story in Hindi"><div class="cover c-bedtime"><button class="fav" data-slug="jugnu-ki-roshni" aria-label="पसंद में जोड़ें">♡</button><span>🌙</span><span class="min">1 मिनट</span></div><div class="cb"><span class="tag bedtime">सोने से पहले</span><h3>जुगनू की रोशनी</h3><p>एक नन्हे जुगनू ने अँधेरे जंगल को कैसे रोशन कर दिया।</p></div></a><a class="card" href="/kahani/chhota-sa-chaand.html" data-s="chhota-sa-chaand" data-c="bedtime" data-t="छोटा सा चाँद एक बच्चे ने तालाब में उतरे चाँद से दोस्ती कर ली। Chhota Sa Chaand | Bedtime Story in Hindi"><div class="cover c-bedtime"><button class="fav" data-slug="chhota-sa-chaand" aria-label="पसंद में जोड़ें">♡</button><span>🌙</span><span class="min">1 मिनट</span></div><div class="cb"><span class="tag bedtime">सोने से पहले</span><h3>छोटा सा चाँद</h3><p>एक बच्चे ने तालाब में उतरे चाँद से दोस्ती कर ली।</p></div></a></div><p id="empty" class="hide" style="text-align:center;color:var(--mute)">कोई कहानी नहीं मिली।</p><h2><a href="/category/horror.html">👻 हॉरर कहानियाँ</a></h2><p style="color:var(--mute);margin-top:0">रात में सुनने वाली डरावनी हिंदी ऑडियो कहानियाँ। छोटे एपिसोड, हर बार नया रोमांच।</p><h2><a href="/category/rahasya.html">🔍 रहस्य कहानियाँ</a></h2><p style="color:var(--mute);margin-top:0">रहस्य और जासूसी की हिंदी ऑडियो कहानियाँ, जिनका अंत आपको चौंका देगा।</p><h2><a href="/category/bedtime.html">🌙 सोने से पहले की कहानियाँ</a></h2><p style="color:var(--mute);margin-top:0">बच्चों और बड़ों के लिए सुकून भरी हिंदी कहानियाँ, जो नींद से पहले सुनने के लिए बनी हैं।</p><h2>अक्सर पूछे जाने वाले सवाल</h2><details><summary>KahaniSuno क्या है?</summary><p>KahaniSuno एक मुफ़्त हिंदी ऑडियो कहानी वेबसाइट है, जहाँ हॉरर, रहस्य और सोने से पहले की कहानियाँ सुनी जा सकती हैं।</p></details><details><summary>क्या कहानियाँ मुफ़्त हैं?</summary><p>हाँ, सभी कहानियाँ पढ़ने और सुनने के लिए पूरी तरह मुफ़्त हैं।</p></details><details><summary>क्या मैं कहानी बीच में छोड़कर बाद में सुन सकता हूँ?</summary><p>हाँ, आपकी जगह इसी डिवाइस पर याद रहती है, इसलिए आप वहीं से आगे सुन सकते हैं।</p></details><details><summary>नई कहानियाँ कब आती हैं?</summary><p>हम नियमित रूप से नए एपिसोड जोड़ते हैं। अपडेट के लिए पेज के नीचे दिया चैनल लिंक देखें।</p></details></main><footer><div class="wrap">
+<p><a href="/about.html">हमारे बारे में</a><a href="/privacy.html">प्राइवेसी</a><a href="/contact.html">संपर्क</a><a href="/feed.xml">RSS</a></p>
+<p>© 2026 KahaniSuno। कहानियाँ AI की मदद से लिखी और सुनाई गई हैं।</p></div></footer><script src="/assets/site.js" defer></script></body></html>
